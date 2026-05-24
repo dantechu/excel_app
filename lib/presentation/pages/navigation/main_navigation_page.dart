@@ -105,10 +105,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                 children: navigationItems.asMap().entries.map((entry) {
                   return KeyedSubtree(
                     key: ValueKey('page_${entry.key}'),
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 70),
-                      child: entry.value.page,
-                    ),
+                    child: entry.value.page,
                   );
                 }).toList(),
               ),
@@ -211,10 +208,10 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                             ),
                             child: Icon(
                               item.icon,
-                              size: 20,
+                              size: isSelected ? 20 : 24,
                               color: isSelected
                                   ? theme.colorScheme.primary
-                                  : theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                                  : theme.colorScheme.onSurface.withValues(alpha: 0.65),
                             ),
                           ),
                           AnimatedSize(
