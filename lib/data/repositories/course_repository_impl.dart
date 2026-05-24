@@ -82,16 +82,8 @@ class CourseRepositoryImpl implements CourseRepository {
         // Get the selected course
         return await getCourseById(selectedId);
       } else {
-        // No selection, return default course
-        final defaultCourse = await getDefaultCourse();
-
-        // Save it as selected
-        defaultCourse.fold(
-          (l) => null,
-          (course) => localDataSource.setSelectedCourseId(course.id),
-        );
-
-        return defaultCourse;
+        // No selection, return failure so bloc can handle default selection logic
+        return Left(CacheFailure('No course selected'));
       }
     } catch (e) {
       return Left(CacheFailure('Failed to get selected course: $e'));

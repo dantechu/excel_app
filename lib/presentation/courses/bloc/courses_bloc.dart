@@ -42,10 +42,8 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
               return;
             }
 
-            final defaultCourse = courses.firstWhere(
-              (course) => course.isDefault,
-              orElse: () => courses.first,
-            );
+            // Select 2nd course if available, otherwise first
+            final defaultCourse = courses.length >= 2 ? courses[1] : courses.first;
 
             // Select the default course
             final selectResult = await selectCourse(defaultCourse.id);
@@ -86,10 +84,8 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
               return;
             }
 
-            final defaultCourse = courses.firstWhere(
-              (course) => course.isDefault,
-              orElse: () => courses.first,
-            );
+            // Select 2nd course if available, otherwise first
+            final defaultCourse = courses.length >= 2 ? courses[1] : courses.first;
 
             // Select the default course
             final selectResult = await selectCourse(defaultCourse.id);
