@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AppConstants {
   static const String appName = 'Qi Gong Healing Workout';
-  static const String appVersion = '1.0.0';
+  static const String appVersion = '2.0.0';
   static const String bundleId = 'com.amazingelearning.chikung';
   
   // Contact Information

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:healing_app/core/services/premium_service.dart';
 import 'package:flutter/material.dart';
@@ -859,15 +860,7 @@ class SettingsPage extends StatelessWidget {
                       child: FilledButton(
                         onPressed: () {
                           Navigator.of(context).pop();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(AppLocalizations.of(context)?.thankYouRating ?? 'Thank you! Opening app store...'),
-                              behavior: SnackBarBehavior.floating,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                          );
+                          _launchAppStore(context);
                         },
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
@@ -900,6 +893,32 @@ class SettingsPage extends StatelessWidget {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  void _launchAppStore(BuildContext context) async {
+    final String url;
+    if (Platform.isIOS) {
+      url = 'https://apps.apple.com/app/${AppConstants.bundleId}';
+    } else {
+      url = 'https://play.google.com/store/apps/details?id=${AppConstants.bundleId}';
+    }
+
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)?.thankYouRating ?? 'Thank you for your support!'),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
+      }
     }
   }
 
