@@ -42,8 +42,11 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
               return;
             }
 
-            // Select 2nd course if available, otherwise first
-            final defaultCourse = courses.length >= 2 ? courses[1] : courses.first;
+            // Find course with isHealingDefault = true, fallback to first course
+            final defaultCourse = courses.firstWhere(
+              (course) => course.isHealingDefault,
+              orElse: () => courses.first,
+            );
 
             // Select the default course
             final selectResult = await selectCourse(defaultCourse.id);
@@ -84,8 +87,11 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
               return;
             }
 
-            // Select 2nd course if available, otherwise first
-            final defaultCourse = courses.length >= 2 ? courses[1] : courses.first;
+            // Find course with isHealingDefault = true, fallback to first course
+            final defaultCourse = courses.firstWhere(
+              (course) => course.isHealingDefault,
+              orElse: () => courses.first,
+            );
 
             // Select the default course
             final selectResult = await selectCourse(defaultCourse.id);
