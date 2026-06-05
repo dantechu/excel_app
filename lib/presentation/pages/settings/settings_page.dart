@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
-import 'package:healing_app/core/services/premium_service.dart';
+import 'package:excel_app/core/services/premium_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
