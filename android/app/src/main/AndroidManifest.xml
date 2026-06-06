@@ -7,7 +7,7 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
-        android:label="Healing Workout"
+        android:label="Excel Mastery"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:networkSecurityConfig="@xml/network_security_config">
