@@ -42,9 +42,9 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
               return;
             }
 
-            // Find course with isHealingDefault = true, fallback to first course
+            // Find course with isExcelDefault = true, fallback to first course
             final defaultCourse = courses.firstWhere(
-              (course) => course.isHealingDefault,
+              (course) => course.isExcelDefault,
               orElse: () => courses.first,
             );
 
@@ -87,9 +87,9 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
               return;
             }
 
-            // Find course with isHealingDefault = true, fallback to first course
+            // Find course with isExcelDefault = true, fallback to first course
             final defaultCourse = courses.firstWhere(
-              (course) => course.isHealingDefault,
+              (course) => course.isExcelDefault,
               orElse: () => courses.first,
             );
 

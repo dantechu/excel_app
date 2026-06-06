@@ -8,7 +8,7 @@ class Course extends Equatable {
   final String description;
   final bool isActive;
   final bool isDefault;
-  final bool isHealingDefault;
+  final bool isExcelDefault;
   final bool isFree;
   final int order;
   final String? thumbnailUrl;
@@ -37,7 +37,7 @@ class Course extends Equatable {
     required this.description,
     required this.isActive,
     required this.isDefault,
-    required this.isHealingDefault,
+    required this.isExcelDefault,
     required this.isFree,
     required this.order,
     this.thumbnailUrl,
@@ -136,7 +136,7 @@ class Course extends Equatable {
     String? description,
     bool? isActive,
     bool? isDefault,
-    bool? isHealingDefault,
+    bool? isExcelDefault,
     bool? isFree,
     int? order,
     String? thumbnailUrl,
@@ -163,7 +163,7 @@ class Course extends Equatable {
       description: description ?? this.description,
       isActive: isActive ?? this.isActive,
       isDefault: isDefault ?? this.isDefault,
-      isHealingDefault: isHealingDefault ?? this.isHealingDefault,
+      isExcelDefault: isExcelDefault ?? this.isExcelDefault,
       isFree: isFree ?? this.isFree,
       order: order ?? this.order,
       thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
@@ -193,7 +193,7 @@ class Course extends Equatable {
         description,
         isActive,
         isDefault,
-        isHealingDefault,
+        isExcelDefault,
         isFree,
         order,
         thumbnailUrl,
@@ -217,7 +217,7 @@ class Course extends Equatable {
 
   @override
   String toString() {
-    return 'Course(id: $id, name: $name, sections: ${sections.length}, active: $isActive, default: $isDefault, healingDefault: $isHealingDefault, free: $isFree)';
+    return 'Course(id: $id, name: $name, sections: ${sections.length}, active: $isActive, default: $isDefault, excelDefault: $isExcelDefault, free: $isFree)';
   }
 }
 

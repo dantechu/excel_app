@@ -9,7 +9,7 @@ class CourseModel {
   final String description;
   final bool isActive;
   final bool isDefault;
-  final bool isHealingDefault;
+  final bool isExcelDefault;
   final bool isFree;
   final int order;
   final String? thumbnailUrl;
@@ -38,7 +38,7 @@ class CourseModel {
     required this.description,
     required this.isActive,
     required this.isDefault,
-    required this.isHealingDefault,
+    required this.isExcelDefault,
     required this.isFree,
     required this.order,
     this.thumbnailUrl,
@@ -75,7 +75,7 @@ class CourseModel {
       description: map['description'] as String? ?? '',
       isActive: map['isActive'] as bool? ?? false,
       isDefault: map['isDefault'] as bool? ?? false,
-      isHealingDefault: map['isHealingDefault'] as bool? ?? false,
+      isExcelDefault: map['isExcelDefault'] as bool? ?? false,
       isFree: map['isFree'] as bool? ?? false,
       order: map['order'] as int? ?? 0,
       thumbnailUrl: map['thumbnailUrl'] as String?,
@@ -136,7 +136,7 @@ class CourseModel {
       'description': description,
       'isActive': isActive,
       'isDefault': isDefault,
-      'isHealingDefault': isHealingDefault,
+      'isExcelDefault': isExcelDefault,
       'isFree': isFree,
       'order': order,
       'thumbnailUrl': thumbnailUrl,
@@ -167,7 +167,7 @@ class CourseModel {
       'description': description,
       'isActive': isActive,
       'isDefault': isDefault,
-      'isHealingDefault': isHealingDefault,
+      'isExcelDefault': isExcelDefault,
       'isFree': isFree,
       'order': order,
       'thumbnailUrl': thumbnailUrl,
@@ -199,7 +199,7 @@ class CourseModel {
       description: description,
       isActive: isActive,
       isDefault: isDefault,
-      isHealingDefault: isHealingDefault,
+      isExcelDefault: isExcelDefault,
       isFree: isFree,
       order: order,
       thumbnailUrl: thumbnailUrl,
@@ -231,7 +231,7 @@ class CourseModel {
       description: course.description,
       isActive: course.isActive,
       isDefault: course.isDefault,
-      isHealingDefault: course.isHealingDefault,
+      isExcelDefault: course.isExcelDefault,
       isFree: course.isFree,
       order: course.order,
       thumbnailUrl: course.thumbnailUrl,
