@@ -166,7 +166,7 @@ class _SplashPageState extends State<SplashPage>
                         ],
                       ),
                       child: Icon(
-                        Icons.self_improvement,
+                        Icons.grid_on_rounded,
                         size: 60,
                         color: theme.colorScheme.primary,
                       ),
@@ -182,21 +182,21 @@ class _SplashPageState extends State<SplashPage>
             FadeTransition(
               opacity: _fadeAnimation,
               child: Text(
-                'Healing Workout',
+                'Excel Training',
                 style: theme.textTheme.headlineLarge?.copyWith(
                   color: theme.colorScheme.onPrimary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 8),
-            
+
             // Subtitle
             FadeTransition(
               opacity: _fadeAnimation,
               child: Text(
-                'Master the Art of Qi Gong',
+                'Master Spreadsheets Step by Step',
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: theme.colorScheme.onPrimary.withValues(alpha: 0.9),
                 ),

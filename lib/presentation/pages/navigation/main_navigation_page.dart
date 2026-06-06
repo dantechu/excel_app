@@ -10,7 +10,6 @@ import '../../bloc/premium/premium_bloc.dart';
 import '../../courses/bloc/courses_bloc.dart';
 import '../../courses/bloc/courses_event.dart';
 import '../home/home_page.dart';
-import '../practice/practice_page.dart';
 import '../../courses/pages/courses_page.dart';
 import '../settings/settings_page.dart';
 
@@ -31,12 +30,6 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
         selectedIcon: Icons.home_rounded,
         label: AppLocalizations.of(context)?.home ?? 'Home',
         page: const HomePage(),
-      ),
-      NavigationItem(
-        icon: Icons.self_improvement_outlined,
-        selectedIcon: Icons.self_improvement_rounded,
-        label: AppLocalizations.of(context)?.practice ?? 'Practice',
-        page: const PracticePage(),
       ),
       NavigationItem(
         icon: Icons.school_outlined,
@@ -60,7 +53,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
       // Home tab: reload selected course and videos
       blocContext.read<CoursesBloc>().add(const LoadSelectedCourse());
       blocContext.read<VideoBloc>().add(const LoadVideos());
-    } else if (index == 2) {
+    } else if (index == 1) {
       // Courses tab: ensure courses list is loaded
       blocContext.read<CoursesBloc>().add(const LoadCourses());
     }

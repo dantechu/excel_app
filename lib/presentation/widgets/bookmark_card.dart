@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../core/services/thumbnail_cache_service.dart';
@@ -84,237 +83,174 @@ class _BookmarkCardState extends State<BookmarkCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final isLocked = video.isPremium && !isPremiumUser;
     final langCode = LocalizationHelper.getCurrentLanguageCode(context);
 
     return SizedBox(
-      width: 180,
-      height: 150,
-      child: Stack(
-        children: [
-          // Main card with thumbnail
-          Positioned.fill(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  // Thumbnail image
-                  _buildThumbnailImage(theme, isLocked),
-
-                  // Gradient overlay
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withValues(alpha: 0.7),
-                        ],
-                        stops: const [0.3, 1.0],
-                      ),
-                    ),
+      width: 200,
+      child: Container(
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.surfaceDark : AppColors.cardBackground,
+          borderRadius: BorderRadius.circular(AppColors.radiusMD),
+          border: Border.all(
+            color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+            width: 1,
+          ),
+        ),
+        child: Material(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(AppColors.radiusMD),
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(AppColors.radiusMD),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Thumbnail with 16:9 aspect ratio
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(AppColors.radiusMD),
+                    topRight: Radius.circular(AppColors.radiusMD),
                   ),
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        _buildThumbnailImage(theme, isLocked),
 
-                  // Premium lock overlay
-                  if (isLocked)
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Colors.black.withValues(alpha: 0.5),
-                            Colors.black.withValues(alpha: 0.7),
-                          ],
-                        ),
-                      ),
-                      child: Center(
-                        child: Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.15),
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.2),
-                              width: 1.5,
+                        // Gradient overlay
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          height: 40,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.black.withValues(alpha: 0.6),
+                                ],
+                              ),
                             ),
                           ),
-                          child: const Icon(
-                            Icons.lock_rounded,
-                            size: 22,
-                            color: Colors.white,
+                        ),
+
+                        // Play button
+                        if (!isLocked && !_thumbnailLoading && !_thumbnailError &&
+                            (_thumbnailData != null || (video.thumbnailUrl != null && video.thumbnailUrl!.isNotEmpty)))
+                          Center(
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.7),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.play_arrow_rounded,
+                                size: 24,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
 
-          // Play button - glassmorphic
-          if (!isLocked && !_thumbnailLoading && !_thumbnailError &&
-              (_thumbnailData != null || (video.thumbnailUrl != null && video.thumbnailUrl!.isNotEmpty)))
-            Positioned(
-              top: 12,
-              right: 12,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.25),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.3),
-                        width: 1,
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.play_arrow_rounded,
-                      size: 18,
-                      color: Colors.white,
+                        // Duration badge
+                        if (video.duration.inSeconds > 0)
+                          Positioned(
+                            bottom: 6,
+                            right: 6,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.85),
+                                borderRadius: BorderRadius.circular(AppColors.radiusXS),
+                              ),
+                              child: Text(
+                                _formatDuration(video.duration.inSeconds),
+                                style: theme.textTheme.labelSmall?.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                        // PRO badge
+                        if (video.isPremium)
+                          Positioned(
+                            top: 6,
+                            right: 6,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: theme.colorScheme.primary,
+                                borderRadius: BorderRadius.circular(AppColors.radiusXS),
+                              ),
+                              child: Text(
+                                'PRO',
+                                style: theme.textTheme.labelSmall?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 10,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                        // Lock overlay
+                        if (isLocked)
+                          Container(
+                            color: Colors.black.withValues(alpha: 0.5),
+                            child: Center(
+                              child: Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withValues(alpha: 0.6),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.lock_rounded,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-            ),
 
-          // Duration badge
-          if (video.duration.inSeconds > 0)
-            Positioned(
-              top: 12,
-              left: 12,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.4),
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.1),
-                        width: 0.5,
-                      ),
-                    ),
+                // Title
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
                     child: Text(
-                      _formatDuration(video.duration.inSeconds),
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: Colors.white,
-                        fontSize: 10,
+                      video.getLocalizedTitle(langCode),
+                      style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w600,
-                        letterSpacing: 0.3,
+                        fontSize: 13,
+                        height: 1.3,
+                        color: isLocked
+                            ? theme.colorScheme.onSurface.withValues(alpha: 0.5)
+                            : theme.colorScheme.onSurface,
                       ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),
-              ),
-            ),
-
-          // PRO badge for locked content
-          if (isLocked)
-            Positioned(
-              top: 12,
-              left: 12,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      AppColors.goldenTan,
-                      AppColors.goldenTanDark,
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.goldenTan.withValues(alpha: 0.4),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Text(
-                  'PRO',
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 10,
-                    letterSpacing: 0.8,
-                  ),
-                ),
-              ),
-            ),
-
-          // Title overlay at bottom
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.black.withValues(alpha: 0.0),
-                        Colors.black.withValues(alpha: 0.3),
-                      ],
-                    ),
-                  ),
-                  child: Text(
-                    video.getLocalizedTitle(langCode),
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13,
-                      height: 1.3,
-                      color: Colors.white,
-                      letterSpacing: -0.2,
-                      shadows: [
-                        Shadow(
-                          color: Colors.black.withValues(alpha: 0.5),
-                          blurRadius: 4,
-                        ),
-                      ],
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ),
+              ],
             ),
           ),
-
-          // Tap target
-          Positioned.fill(
-            child: Material(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(20),
-              child: InkWell(
-                onTap: onTap,
-                borderRadius: BorderRadius.circular(20),
-                splashColor: Colors.white.withValues(alpha: 0.1),
-                highlightColor: Colors.white.withValues(alpha: 0.05),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -344,50 +280,27 @@ class _BookmarkCardState extends State<BookmarkCard> {
   }
 
   Widget _buildPlaceholder(ThemeData theme, bool isLocked, {bool isLoading = false}) {
+    final isDark = theme.brightness == Brightness.dark;
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: isLocked
-              ? [
-                  theme.colorScheme.surfaceContainerHighest,
-                  theme.colorScheme.surfaceContainerHigh,
-                ]
-              : [
-                  theme.colorScheme.primaryContainer.withValues(alpha: 0.8),
-                  theme.colorScheme.primaryContainer.withValues(alpha: 0.5),
-                ],
-        ),
-      ),
+      color: isDark
+          ? AppColors.surfaceDarkAlt
+          : AppColors.backgroundLightAlt,
       child: Center(
         child: isLoading
             ? SizedBox(
                 width: 24,
                 height: 24,
                 child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: isLocked
-                      ? theme.colorScheme.onSurface.withValues(alpha: 0.3)
-                      : theme.colorScheme.primary.withValues(alpha: 0.6),
+                  strokeWidth: 2.5,
+                  color: theme.colorScheme.primary.withValues(alpha: 0.6),
                 ),
               )
-            : Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: isLocked
-                      ? theme.colorScheme.onSurface.withValues(alpha: 0.08)
-                      : theme.colorScheme.primary.withValues(alpha: 0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.play_arrow_rounded,
-                  size: 28,
-                  color: isLocked
-                      ? theme.colorScheme.onSurface.withValues(alpha: 0.3)
-                      : theme.colorScheme.primary,
-                ),
+            : Icon(
+                Icons.play_circle_outline_rounded,
+                size: 36,
+                color: isLocked
+                    ? theme.colorScheme.onSurface.withValues(alpha: 0.3)
+                    : theme.colorScheme.primary.withValues(alpha: 0.5),
               ),
       ),
     );

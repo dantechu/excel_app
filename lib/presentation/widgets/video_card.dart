@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -99,60 +98,32 @@ class _VideoCardState extends State<VideoCard> {
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: isDark
-                    ? [
-                        Colors.white.withValues(alpha: 0.06),
-                        Colors.white.withValues(alpha: 0.02),
-                      ]
-                    : [
-                        Colors.white.withValues(alpha: 0.95),
-                        Colors.white.withValues(alpha: 0.85),
-                      ],
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.surfaceDark : AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(AppColors.radiusMD),
+        border: Border.all(
+          color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+          width: 1,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(AppColors.radiusMD),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppColors.radiusMD),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Thumbnail section - 16:9 aspect ratio like Udemy
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: _buildThumbnail(theme, isLocked),
               ),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: isDark
-                    ? Colors.white.withValues(alpha: 0.08)
-                    : theme.colorScheme.outline.withValues(alpha: 0.08),
-                width: 1,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: Material(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(20),
-              clipBehavior: Clip.antiAlias,
-              child: InkWell(
-                onTap: onTap,
-                borderRadius: BorderRadius.circular(20),
-                child: SizedBox(
-                  height: 108,
-                  child: Row(
-                    children: [
-                      _buildThumbnail(theme, isLocked),
-                      Expanded(
-                        child: _buildContent(theme, isLocked),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+              // Content section
+              _buildContent(theme, isLocked),
+            ],
           ),
         ),
       ),
@@ -161,137 +132,117 @@ class _VideoCardState extends State<VideoCard> {
 
   Widget _buildThumbnail(ThemeData theme, bool isLocked) {
     return Container(
-      width: 120,
-      height: 108,
-      margin: const EdgeInsets.all(8),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.15),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        color: theme.colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppColors.radiusMD),
+          topRight: Radius.circular(AppColors.radiusMD),
+        ),
       ),
       child: Stack(
         fit: StackFit.expand,
         children: [
           // Thumbnail image or placeholder
-          ClipRRect(
-            borderRadius: BorderRadius.circular(14),
-            child: _buildThumbnailImage(theme, isLocked),
+          _buildThumbnailImage(theme, isLocked),
+
+          // Gradient overlay for better text visibility
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 60,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.5),
+                  ],
+                ),
+              ),
+            ),
           ),
 
-          // Gradient overlay for better text readability
-          if (!isLocked)
-            Positioned.fill(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withValues(alpha: 0.3),
-                    ],
-                    stops: const [0.5, 1.0],
-                  ),
-                ),
-              ),
-            ),
-
-          // Play button overlay - glassmorphic style
+          // Play button overlay
           if (!isLocked && !_thumbnailLoading && !_thumbnailError && (_thumbnailData != null || (video.thumbnailUrl != null && video.thumbnailUrl!.isNotEmpty)))
             Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.25),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.3),
-                        width: 1.5,
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.play_arrow_rounded,
-                      size: 24,
-                      color: Colors.white,
-                    ),
-                  ),
+              child: Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.7),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.play_arrow_rounded,
+                  size: 32,
+                  color: Colors.white,
                 ),
               ),
             ),
 
-          // Duration badge - modern pill style
+          // Duration badge - bottom right
           if (video.duration.inSeconds > 0)
             Positioned(
               bottom: 8,
               right: 8,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.5),
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.1),
-                        width: 0.5,
-                      ),
-                    ),
-                    child: Text(
-                      _formatDuration(video.duration.inSeconds),
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.3,
-                      ),
-                    ),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.85),
+                  borderRadius: BorderRadius.circular(AppColors.radiusXS),
+                ),
+                child: Text(
+                  _formatDuration(video.duration.inSeconds),
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ),
 
-          // Premium lock overlay - modern style
-          if (isLocked)
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Colors.black.withValues(alpha: 0.5),
-                    Colors.black.withValues(alpha: 0.7),
-                  ],
+          // PRO badge - top right
+          if (video.isPremium)
+            Positioned(
+              top: 8,
+              right: 8,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primary,
+                  borderRadius: BorderRadius.circular(AppColors.radiusXS),
+                ),
+                child: Text(
+                  'PRO',
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 11,
+                    letterSpacing: 0.5,
+                  ),
                 ),
               ),
+            ),
+
+          // Premium lock overlay
+          if (isLocked)
+            Container(
+              color: Colors.black.withValues(alpha: 0.5),
               child: Center(
                 child: Container(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.15),
+                    color: Colors.black.withValues(alpha: 0.6),
                     shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.2),
-                      width: 1.5,
-                    ),
                   ),
                   child: const Icon(
                     Icons.lock_rounded,
-                    size: 18,
+                    size: 28,
                     color: Colors.white,
                   ),
                 ),
@@ -331,50 +282,27 @@ class _VideoCardState extends State<VideoCard> {
   }
 
   Widget _buildPlaceholder(ThemeData theme, bool isLocked, {bool isLoading = false}) {
+    final isDark = theme.brightness == Brightness.dark;
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: isLocked
-              ? [
-                  theme.colorScheme.surfaceContainerHighest,
-                  theme.colorScheme.surfaceContainerHigh,
-                ]
-              : [
-                  theme.colorScheme.primaryContainer.withValues(alpha: 0.7),
-                  theme.colorScheme.primaryContainer.withValues(alpha: 0.4),
-                ],
-        ),
-      ),
+      color: isDark
+          ? AppColors.surfaceDarkAlt
+          : AppColors.backgroundLightAlt,
       child: Center(
         child: isLoading
             ? SizedBox(
-                width: 24,
-                height: 24,
+                width: 32,
+                height: 32,
                 child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: isLocked
-                      ? theme.colorScheme.onSurface.withValues(alpha: 0.3)
-                      : theme.colorScheme.primary.withValues(alpha: 0.6),
+                  strokeWidth: 2.5,
+                  color: theme.colorScheme.primary.withValues(alpha: 0.6),
                 ),
               )
-            : Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: isLocked
-                      ? theme.colorScheme.onSurface.withValues(alpha: 0.08)
-                      : theme.colorScheme.primary.withValues(alpha: 0.15),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.play_arrow_rounded,
-                  size: 28,
-                  color: isLocked
-                      ? theme.colorScheme.onSurface.withValues(alpha: 0.3)
-                      : theme.colorScheme.primary,
-                ),
+            : Icon(
+                Icons.play_circle_outline_rounded,
+                size: 48,
+                color: isLocked
+                    ? theme.colorScheme.onSurface.withValues(alpha: 0.3)
+                    : theme.colorScheme.primary.withValues(alpha: 0.5),
               ),
       ),
     );
@@ -407,98 +335,46 @@ class _VideoCardState extends State<VideoCard> {
     final isDark = theme.brightness == Brightness.dark;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 12, 16, 12),
+      padding: const EdgeInsets.all(14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Title row with PRO badge
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      video.getLocalizedTitle(langCode),
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        height: 1.35,
-                        letterSpacing: -0.2,
-                        color: isLocked
-                            ? theme.colorScheme.onSurface.withValues(alpha: 0.5)
-                            : theme.colorScheme.onSurface,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  if (isLocked) ...[
-                    const SizedBox(width: 8),
-                    // Modern PRO badge with gradient
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            AppColors.goldenTan,
-                            AppColors.goldenTanDark,
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.goldenTan.withValues(alpha: 0.3),
-                            blurRadius: 6,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Text(
-                        'PRO',
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 9,
-                          letterSpacing: 0.8,
-                        ),
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            ],
+          // Title
+          Text(
+            video.getLocalizedTitle(langCode),
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+              height: 1.3,
+              color: isLocked
+                  ? theme.colorScheme.onSurface.withValues(alpha: 0.5)
+                  : theme.colorScheme.onSurface,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          // Category and action row with improved styling
+
+          const SizedBox(height: 8),
+
+          // Category row with bookmark
           Row(
             children: [
-              // Category chip
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary.withValues(alpha: isDark ? 0.15 : 0.08),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+              // Category/Section name
+              Expanded(
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      Icons.folder_rounded,
-                      size: 12,
+                      Icons.folder_outlined,
+                      size: 14,
                       color: theme.colorScheme.primary.withValues(alpha: 0.8),
                     ),
-                    const SizedBox(width: 4),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 90),
+                    const SizedBox(width: 6),
+                    Flexible(
                       child: Text(
                         _getLocalizedSectionName(langCode),
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.primary,
-                          fontSize: 11,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondary,
                           fontWeight: FontWeight.w500,
                         ),
                         maxLines: 1,
@@ -508,49 +384,32 @@ class _VideoCardState extends State<VideoCard> {
                   ],
                 ),
               ),
-              const Spacer(),
-              // Bookmark button with animation
+
+              // Bookmark button
               BlocBuilder<BookmarkBloc, BookmarkState>(
                 builder: (context, state) {
                   final isBookmarked = state is BookmarkLoaded &&
                       state.isVideoBookmarked(video.id);
-                  return GestureDetector(
-                    onTap: () {
-                      context.read<BookmarkBloc>().add(ToggleBookmark(video.id));
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: isBookmarked
-                            ? theme.colorScheme.primary.withValues(alpha: 0.12)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Icon(
-                        isBookmarked ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
-                        color: isBookmarked
-                            ? theme.colorScheme.primary
-                            : theme.colorScheme.onSurface.withValues(alpha: 0.35),
-                        size: 20,
+                  return Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () {
+                        context.read<BookmarkBloc>().add(ToggleBookmark(video.id));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: Icon(
+                          isBookmarked ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+                          color: isBookmarked
+                              ? theme.colorScheme.primary
+                              : theme.colorScheme.onSurface.withValues(alpha: 0.4),
+                          size: 22,
+                        ),
                       ),
                     ),
                   );
                 },
-              ),
-              const SizedBox(width: 4),
-              // Arrow indicator
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.05),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(
-                  isLocked ? Icons.lock_outline_rounded : Icons.arrow_forward_ios_rounded,
-                  color: theme.colorScheme.onSurface.withValues(alpha: isLocked ? 0.35 : 0.4),
-                  size: 14,
-                ),
               ),
             ],
           ),

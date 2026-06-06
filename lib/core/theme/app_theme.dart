@@ -4,253 +4,264 @@ import 'app_colors.dart';
 
 class AppTheme {
   // ═══════════════════════════════════════════════════════════════════════════
-  // LIGHT THEME - Warm Earth Tones, Grounding, Natural Healing
-  // Inspired by the yin-yang app icon: chocolate brown, golden tan, cream
+  // LIGHT THEME - Modern E-Learning Platform (Udemy-inspired)
+  // Clean, professional with Excel green accents
   // ═══════════════════════════════════════════════════════════════════════════
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
 
-    // Color Scheme - Warm Brown primary with golden tan and cream accents
+    // Color Scheme
     colorScheme: ColorScheme.fromSeed(
-      seedColor: AppColors.warmBrown,
+      seedColor: AppColors.excelGreen,
       brightness: Brightness.light,
-      primary: AppColors.warmBrown,
+      primary: AppColors.excelGreen,
       onPrimary: Colors.white,
-      primaryContainer: AppColors.warmBrownLight.withOpacity(0.2),
-      onPrimaryContainer: AppColors.warmBrownDark,
-      secondary: AppColors.goldenTan,
+      primaryContainer: AppColors.excelGreenLight.withValues(alpha: 0.12),
+      onPrimaryContainer: AppColors.excelGreenDark,
+      secondary: AppColors.excelAccent,
       onSecondary: Colors.white,
-      secondaryContainer: AppColors.goldenTanLight.withOpacity(0.3),
-      onSecondaryContainer: AppColors.goldenTanDark,
-      tertiary: AppColors.softCream,
+      secondaryContainer: AppColors.excelAccentLight.withValues(alpha: 0.15),
+      onSecondaryContainer: AppColors.excelAccentDark,
+      tertiary: AppColors.officeGray,
       onTertiary: AppColors.textPrimary,
-      tertiaryContainer: AppColors.softCreamLight.withOpacity(0.3),
-      onTertiaryContainer: AppColors.softCreamDark,
       surface: AppColors.backgroundLight,
       onSurface: AppColors.textPrimary,
-      surfaceContainerHighest: Colors.white,
+      surfaceContainerHighest: AppColors.cardBackground,
       onSurfaceVariant: AppColors.textSecondary,
-      outline: AppColors.dividerLight,
-      outlineVariant: AppColors.dividerLight.withOpacity(0.5),
+      outline: AppColors.borderLight,
+      outlineVariant: AppColors.dividerLight,
       error: AppColors.errorLight,
       onError: Colors.white,
     ),
 
-    // Scaffold background
+    // Scaffold background - subtle off-white
     scaffoldBackgroundColor: AppColors.backgroundLight,
 
-    // Typography - Nunito font with balanced, readable calm feel
-    textTheme: GoogleFonts.nunitoTextTheme().copyWith(
-      displayLarge: GoogleFonts.nunito(
+    // Typography - Inter with proper hierarchy
+    textTheme: GoogleFonts.interTextTheme().copyWith(
+      // Display - Large marketing headlines
+      displayLarge: GoogleFonts.inter(
+        fontSize: 40,
+        fontWeight: FontWeight.w800,
+        letterSpacing: -1.5,
+        color: AppColors.textPrimary,
+        height: 1.1,
+      ),
+      displayMedium: GoogleFonts.inter(
         fontSize: 32,
-        fontWeight: FontWeight.w300,
+        fontWeight: FontWeight.w700,
         letterSpacing: -0.5,
         color: AppColors.textPrimary,
         height: 1.2,
       ),
-      displayMedium: GoogleFonts.nunito(
+      displaySmall: GoogleFonts.inter(
         fontSize: 28,
-        fontWeight: FontWeight.w300,
-        letterSpacing: -0.3,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -0.25,
+        color: AppColors.textPrimary,
+        height: 1.2,
+      ),
+      // Headlines - Section titles
+      headlineLarge: GoogleFonts.inter(
+        fontSize: 24,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -0.25,
         color: AppColors.textPrimary,
         height: 1.25,
       ),
-      headlineLarge: GoogleFonts.nunito(
-        fontSize: 26,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.3,
+      headlineMedium: GoogleFonts.inter(
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+        letterSpacing: 0,
         color: AppColors.textPrimary,
         height: 1.3,
       ),
-      headlineMedium: GoogleFonts.nunito(
-        fontSize: 24,
+      headlineSmall: GoogleFonts.inter(
+        fontSize: 18,
         fontWeight: FontWeight.w600,
-        letterSpacing: -0.2,
-        color: AppColors.textPrimary,
-        height: 1.3,
-      ),
-      headlineSmall: GoogleFonts.nunito(
-        fontSize: 22,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.2,
+        letterSpacing: 0,
         color: AppColors.textPrimary,
         height: 1.35,
       ),
-      titleLarge: GoogleFonts.nunito(
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.1,
-        color: AppColors.textPrimary,
-        height: 1.4,
-      ),
-      titleMedium: GoogleFonts.nunito(
-        fontSize: 17,
-        fontWeight: FontWeight.w600,
+      // Titles - Card titles, list items
+      titleLarge: GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
         letterSpacing: 0,
         color: AppColors.textPrimary,
         height: 1.4,
       ),
-      titleSmall: GoogleFonts.nunito(
+      titleMedium: GoogleFonts.inter(
         fontSize: 15,
         fontWeight: FontWeight.w600,
-        letterSpacing: 0,
+        letterSpacing: 0.1,
         color: AppColors.textPrimary,
-        height: 1.45,
+        height: 1.4,
       ),
-      bodyLarge: GoogleFonts.nunito(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.15,
-        color: AppColors.textPrimary,
-        height: 1.5,
-      ),
-      bodyMedium: GoogleFonts.nunito(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.15,
-        color: AppColors.textPrimary,
-        height: 1.5,
-      ),
-      bodySmall: GoogleFonts.nunito(
-        fontSize: 13,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.2,
-        color: AppColors.textSecondary,
-        height: 1.5,
-      ),
-      labelLarge: GoogleFonts.nunito(
+      titleSmall: GoogleFonts.inter(
         fontSize: 14,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.1,
         color: AppColors.textPrimary,
         height: 1.4,
       ),
-      labelMedium: GoogleFonts.nunito(
+      // Body - Main content text
+      bodyLarge: GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.15,
+        color: AppColors.textPrimary,
+        height: 1.5,
+      ),
+      bodyMedium: GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.15,
+        color: AppColors.textSecondary,
+        height: 1.5,
+      ),
+      bodySmall: GoogleFonts.inter(
         fontSize: 12,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.2,
+        color: AppColors.textSecondary,
+        height: 1.5,
+      ),
+      // Labels - Buttons, chips, captions
+      labelLarge: GoogleFonts.inter(
+        fontSize: 14,
         fontWeight: FontWeight.w600,
-        letterSpacing: 0.3,
+        letterSpacing: 0.1,
         color: AppColors.textPrimary,
         height: 1.4,
       ),
-      labelSmall: GoogleFonts.nunito(
-        fontSize: 11,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.3,
+      labelMedium: GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.25,
         color: AppColors.textSecondary,
+        height: 1.4,
+      ),
+      labelSmall: GoogleFonts.inter(
+        fontSize: 11,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.3,
+        color: AppColors.textTertiary,
         height: 1.4,
       ),
     ),
 
-    // Card theme - Soft, organic corners with warm shadows
+    // Card theme - White cards on off-white background
     cardTheme: CardThemeData(
-      elevation: AppColors.elevationCard,
-      shadowColor: AppColors.warmBrown.withOpacity(0.08),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusCard),
-      ),
-      color: Colors.white,
+      elevation: 0,
+      color: AppColors.cardBackground,
       surfaceTintColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppColors.radiusMD),
+        side: BorderSide(color: AppColors.dividerLight, width: 1),
+      ),
     ),
 
-    // App bar theme - Clean, minimal
+    // App bar - Clean, minimal
     appBarTheme: AppBarTheme(
-      centerTitle: true,
+      centerTitle: false,
       elevation: 0,
-      scrolledUnderElevation: AppColors.elevationAppBarScrolled,
+      scrolledUnderElevation: 0.5,
       backgroundColor: AppColors.backgroundLight,
       surfaceTintColor: Colors.transparent,
       foregroundColor: AppColors.textPrimary,
-      titleTextStyle: GoogleFonts.nunito(
+      titleTextStyle: GoogleFonts.inter(
         fontSize: 18,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.2,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -0.25,
         color: AppColors.textPrimary,
       ),
       iconTheme: IconThemeData(
         color: AppColors.textPrimary,
-        size: AppColors.iconMedium,
+        size: 24,
       ),
     ),
 
-    // Button themes - Soft, rounded with warm tones
+    // Elevated Button - Primary action
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(120, 52),
-        elevation: AppColors.elevationButton,
-        shadowColor: AppColors.warmBrown.withOpacity(0.2),
+        minimumSize: const Size(120, 48),
+        elevation: 0,
+        shadowColor: Colors.transparent,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppColors.radiusButton),
+          borderRadius: BorderRadius.circular(AppColors.radiusSM),
         ),
-        backgroundColor: AppColors.warmBrown,
+        backgroundColor: AppColors.excelGreen,
         foregroundColor: Colors.white,
-        textStyle: GoogleFonts.nunito(
+        textStyle: GoogleFonts.inter(
           fontSize: 15,
           fontWeight: FontWeight.w600,
-          letterSpacing: 0.2,
+          letterSpacing: 0,
         ),
       ),
     ),
 
+    // Outlined Button
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        minimumSize: Size(120, 52),
+        minimumSize: const Size(120, 48),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppColors.radiusButton),
+          borderRadius: BorderRadius.circular(AppColors.radiusSM),
         ),
-        side: BorderSide(color: AppColors.warmBrown, width: 1.5),
-        foregroundColor: AppColors.warmBrown,
-        textStyle: GoogleFonts.nunito(
+        side: BorderSide(color: AppColors.borderLight, width: 1),
+        foregroundColor: AppColors.textPrimary,
+        textStyle: GoogleFonts.inter(
           fontSize: 15,
           fontWeight: FontWeight.w600,
-          letterSpacing: 0.2,
+          letterSpacing: 0,
         ),
       ),
     ),
 
+    // Text Button
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        minimumSize: Size(64, 48),
+        minimumSize: const Size(64, 44),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppColors.radiusButton),
+          borderRadius: BorderRadius.circular(AppColors.radiusSM),
         ),
-        foregroundColor: AppColors.warmBrown,
-        textStyle: GoogleFonts.nunito(
+        foregroundColor: AppColors.excelGreen,
+        textStyle: GoogleFonts.inter(
           fontSize: 15,
           fontWeight: FontWeight.w600,
-          letterSpacing: 0.2,
+          letterSpacing: 0,
         ),
       ),
     ),
 
-    // Floating Action Button - Soft, prominent with warm brown
+    // FAB
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: AppColors.warmBrown,
+      backgroundColor: AppColors.excelGreen,
       foregroundColor: Colors.white,
-      elevation: AppColors.elevationFab,
+      elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusLarge),
+        borderRadius: BorderRadius.circular(AppColors.radiusLG),
       ),
     ),
 
-    // Bottom navigation - Clean, minimal with warm accents
+    // Bottom Navigation
     navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: AppColors.goldenTan.withOpacity(0.25),
-      height: 68,
-      backgroundColor: Colors.white,
+      indicatorColor: AppColors.excelGreen.withValues(alpha: 0.1),
+      height: 64,
+      backgroundColor: AppColors.cardBackground,
       surfaceTintColor: Colors.transparent,
-      elevation: AppColors.elevationBottomNav,
-      shadowColor: AppColors.warmBrown.withOpacity(0.1),
+      elevation: 0,
       labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>(
         (states) {
           if (states.contains(WidgetState.selected)) {
-            return GoogleFonts.nunito(
+            return GoogleFonts.inter(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: AppColors.warmBrown,
+              color: AppColors.excelGreen,
             );
           }
-          return GoogleFonts.nunito(
+          return GoogleFonts.inter(
             fontSize: 12,
             fontWeight: FontWeight.w500,
             color: AppColors.textSecondary,
@@ -260,634 +271,358 @@ class AppTheme {
       iconTheme: WidgetStateProperty.resolveWith<IconThemeData?>(
         (states) {
           if (states.contains(WidgetState.selected)) {
-            return IconThemeData(
-              color: AppColors.warmBrown,
-              size: AppColors.iconMedium,
-            );
+            return IconThemeData(color: AppColors.excelGreen, size: 24);
           }
-          return IconThemeData(
-            color: AppColors.textSecondary,
-            size: AppColors.iconMedium,
-          );
+          return IconThemeData(color: AppColors.textSecondary, size: 24);
         },
       ),
     ),
 
-    // Input decoration - Soft warm borders
+    // Input Decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: Colors.white,
+      fillColor: AppColors.cardBackground,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        borderSide: BorderSide(color: AppColors.dividerLight),
+        borderRadius: BorderRadius.circular(AppColors.radiusSM),
+        borderSide: BorderSide(color: AppColors.borderLight),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        borderSide: BorderSide(color: AppColors.dividerLight),
+        borderRadius: BorderRadius.circular(AppColors.radiusSM),
+        borderSide: BorderSide(color: AppColors.borderLight),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        borderSide: BorderSide(color: AppColors.warmBrown, width: 2),
+        borderRadius: BorderRadius.circular(AppColors.radiusSM),
+        borderSide: BorderSide(color: AppColors.excelGreen, width: 2),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusButton),
+        borderRadius: BorderRadius.circular(AppColors.radiusSM),
         borderSide: BorderSide(color: AppColors.errorLight),
       ),
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: AppColors.spacingMedium,
-        vertical: AppColors.spacingMedium,
-      ),
-      hintStyle: GoogleFonts.nunito(color: AppColors.textTertiary),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      hintStyle: GoogleFonts.inter(color: AppColors.textTertiary, fontSize: 14),
     ),
 
-    // Chip theme - Rounded, organic with warm selection
+    // Chip Theme
     chipTheme: ChipThemeData(
-      backgroundColor: AppColors.backgroundLightAlt,
-      selectedColor: AppColors.goldenTan.withOpacity(0.25),
-      labelStyle: GoogleFonts.nunito(
+      backgroundColor: AppColors.cardBackground,
+      selectedColor: AppColors.excelGreen.withValues(alpha: 0.1),
+      labelStyle: GoogleFonts.inter(
         color: AppColors.textPrimary,
         fontSize: 13,
         fontWeight: FontWeight.w500,
       ),
-      secondaryLabelStyle: GoogleFonts.nunito(color: AppColors.warmBrown),
+      secondaryLabelStyle: GoogleFonts.inter(color: AppColors.excelGreen),
       brightness: Brightness.light,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusChip),
+        borderRadius: BorderRadius.circular(AppColors.radiusFull),
+        side: BorderSide(color: AppColors.borderLight),
       ),
-      side: BorderSide(color: Colors.transparent),
-      padding: EdgeInsets.symmetric(
-        horizontal: AppColors.spacingSmall,
-        vertical: AppColors.spacingXSmall,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     ),
 
-    // Progress indicator - Warm brown
+    // Progress Indicator
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColors.warmBrown,
-      linearTrackColor: AppColors.warmBrown.withOpacity(0.12),
-      circularTrackColor: AppColors.warmBrown.withOpacity(0.12),
+      color: AppColors.excelGreen,
+      linearTrackColor: AppColors.excelGreen.withValues(alpha: 0.12),
+      circularTrackColor: AppColors.excelGreen.withValues(alpha: 0.12),
     ),
 
-    // Slider theme - Smooth, calming with warm colors
+    // Slider
     sliderTheme: SliderThemeData(
-      activeTrackColor: AppColors.warmBrown,
-      inactiveTrackColor: AppColors.warmBrown.withOpacity(0.2),
-      thumbColor: AppColors.warmBrown,
-      overlayColor: AppColors.warmBrown.withOpacity(0.1),
+      activeTrackColor: AppColors.excelGreen,
+      inactiveTrackColor: AppColors.excelGreen.withValues(alpha: 0.2),
+      thumbColor: AppColors.excelGreen,
+      overlayColor: AppColors.excelGreen.withValues(alpha: 0.1),
       trackHeight: 4,
-      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8),
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
     ),
 
-    // Divider theme
+    // Divider
     dividerTheme: DividerThemeData(
       color: AppColors.dividerLight,
       thickness: 1,
-      space: AppColors.spacingMedium,
+      space: 1,
     ),
 
-    // Dialog theme - Soft, rounded
+    // Dialog
     dialogTheme: DialogThemeData(
-      backgroundColor: Colors.white,
-      elevation: AppColors.elevationDialog,
+      backgroundColor: AppColors.cardBackground,
+      elevation: 16,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusXLarge),
+        borderRadius: BorderRadius.circular(AppColors.radiusLG),
       ),
     ),
 
-    // Bottom sheet theme - Soft corners
+    // Bottom Sheet
     bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: Colors.white,
-      elevation: AppColors.elevationDialog,
+      backgroundColor: AppColors.cardBackground,
+      elevation: 8,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppColors.radiusXLarge),
+          top: Radius.circular(AppColors.radiusXL),
         ),
       ),
     ),
 
-    // Snackbar theme
+    // Snackbar
     snackBarTheme: SnackBarThemeData(
-      backgroundColor: AppColors.surfaceDark,
-      contentTextStyle: GoogleFonts.nunito(color: AppColors.textPrimaryDark),
+      backgroundColor: AppColors.textPrimary,
+      contentTextStyle: GoogleFonts.inter(color: Colors.white, fontSize: 14),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusCard),
+        borderRadius: BorderRadius.circular(AppColors.radiusSM),
       ),
       behavior: SnackBarBehavior.floating,
     ),
 
-    // Switch theme - Warm brown toggle
+    // Switch
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.selected)) {
-            return AppColors.warmBrown;
-          }
-          return AppColors.textTertiary;
-        },
+        (states) => states.contains(WidgetState.selected) ? Colors.white : AppColors.textTertiary,
       ),
       trackColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.selected)) {
-            return AppColors.goldenTan.withOpacity(0.5);
-          }
-          return AppColors.dividerLight;
-        },
+        (states) => states.contains(WidgetState.selected) ? AppColors.excelGreen : AppColors.dividerLight,
       ),
     ),
 
-    // Checkbox theme - Warm brown
+    // Checkbox
     checkboxTheme: CheckboxThemeData(
       fillColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.selected)) {
-            return AppColors.warmBrown;
-          }
-          return Colors.transparent;
-        },
+        (states) => states.contains(WidgetState.selected) ? AppColors.excelGreen : Colors.transparent,
       ),
       checkColor: WidgetStateProperty.all(Colors.white),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      side: BorderSide(color: AppColors.borderLight, width: 1.5),
     ),
 
-    // Radio theme - Warm brown
+    // Radio
     radioTheme: RadioThemeData(
       fillColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.selected)) {
-            return AppColors.warmBrown;
-          }
-          return AppColors.textSecondary;
-        },
+        (states) => states.contains(WidgetState.selected) ? AppColors.excelGreen : AppColors.textSecondary,
       ),
     ),
 
-    // List tile theme
+    // List Tile
     listTileTheme: ListTileThemeData(
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: AppColors.spacingMedium,
-        vertical: AppColors.spacingSmall,
-      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusCard),
+        borderRadius: BorderRadius.circular(AppColors.radiusMD),
       ),
     ),
 
-    // Icon theme
-    iconTheme: IconThemeData(
-      color: AppColors.textSecondary,
-      size: AppColors.iconMedium,
-    ),
-
-    // Primary icon theme - Warm brown
-    primaryIconTheme: IconThemeData(
-      color: AppColors.warmBrown,
-      size: AppColors.iconMedium,
-    ),
+    // Icon Theme
+    iconTheme: IconThemeData(color: AppColors.textSecondary, size: 24),
+    primaryIconTheme: IconThemeData(color: AppColors.excelGreen, size: 24),
   );
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // DARK THEME - Deep Warm Night, Cozy Grounding
-  // Warm earth tones adapted for dark mode visibility
+  // DARK THEME
   // ═══════════════════════════════════════════════════════════════════════════
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
 
-    // Color Scheme - Warm Brown Light for dark mode visibility
     colorScheme: ColorScheme.fromSeed(
-      seedColor: AppColors.warmBrownLight,
+      seedColor: AppColors.excelGreenLight,
       brightness: Brightness.dark,
-      primary: AppColors.goldenTan,
-      onPrimary: AppColors.backgroundDark,
-      primaryContainer: AppColors.warmBrown.withOpacity(0.3),
-      onPrimaryContainer: AppColors.goldenTanLight,
-      secondary: AppColors.goldenTanLight,
+      primary: AppColors.excelAccent,
+      onPrimary: Colors.white,
+      primaryContainer: AppColors.excelGreen.withValues(alpha: 0.25),
+      onPrimaryContainer: AppColors.excelAccentLight,
+      secondary: AppColors.excelAccentLight,
       onSecondary: AppColors.backgroundDark,
-      secondaryContainer: AppColors.goldenTan.withOpacity(0.3),
-      onSecondaryContainer: AppColors.goldenTanLight,
-      tertiary: AppColors.softCreamLight,
-      onTertiary: AppColors.backgroundDark,
-      tertiaryContainer: AppColors.softCream.withOpacity(0.3),
-      onTertiaryContainer: AppColors.softCreamLight,
+      secondaryContainer: AppColors.excelAccent.withValues(alpha: 0.25),
+      onSecondaryContainer: AppColors.excelAccentLight,
       surface: AppColors.surfaceDark,
       onSurface: AppColors.textPrimaryDark,
       surfaceContainerHighest: AppColors.surfaceDarkAlt,
       onSurfaceVariant: AppColors.textSecondaryDark,
-      outline: AppColors.dividerDark,
-      outlineVariant: AppColors.dividerDark.withOpacity(0.5),
+      outline: AppColors.borderDark,
+      outlineVariant: AppColors.dividerDark,
       error: AppColors.errorDark,
       onError: AppColors.backgroundDark,
     ),
 
-    // Scaffold background
     scaffoldBackgroundColor: AppColors.backgroundDark,
 
-    // Typography - Nunito font, balanced, readable (dark theme)
-    textTheme: GoogleFonts.nunitoTextTheme().copyWith(
-      displayLarge: GoogleFonts.nunito(
-        fontSize: 32,
-        fontWeight: FontWeight.w300,
-        letterSpacing: -0.5,
-        color: AppColors.textPrimaryDark,
-        height: 1.2,
-      ),
-      displayMedium: GoogleFonts.nunito(
-        fontSize: 28,
-        fontWeight: FontWeight.w300,
-        letterSpacing: -0.3,
-        color: AppColors.textPrimaryDark,
-        height: 1.25,
-      ),
-      headlineLarge: GoogleFonts.nunito(
-        fontSize: 26,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.3,
-        color: AppColors.textPrimaryDark,
-        height: 1.3,
-      ),
-      headlineMedium: GoogleFonts.nunito(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.2,
-        color: AppColors.textPrimaryDark,
-        height: 1.3,
-      ),
-      headlineSmall: GoogleFonts.nunito(
-        fontSize: 22,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.2,
-        color: AppColors.textPrimaryDark,
-        height: 1.35,
-      ),
-      titleLarge: GoogleFonts.nunito(
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.1,
-        color: AppColors.textPrimaryDark,
-        height: 1.4,
-      ),
-      titleMedium: GoogleFonts.nunito(
-        fontSize: 17,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0,
-        color: AppColors.textPrimaryDark,
-        height: 1.4,
-      ),
-      titleSmall: GoogleFonts.nunito(
-        fontSize: 15,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0,
-        color: AppColors.textPrimaryDark,
-        height: 1.45,
-      ),
-      bodyLarge: GoogleFonts.nunito(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.15,
-        color: AppColors.textPrimaryDark,
-        height: 1.5,
-      ),
-      bodyMedium: GoogleFonts.nunito(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.15,
-        color: AppColors.textPrimaryDark,
-        height: 1.5,
-      ),
-      bodySmall: GoogleFonts.nunito(
-        fontSize: 13,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.2,
-        color: AppColors.textSecondaryDark,
-        height: 1.5,
-      ),
-      labelLarge: GoogleFonts.nunito(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.1,
-        color: AppColors.textPrimaryDark,
-        height: 1.4,
-      ),
-      labelMedium: GoogleFonts.nunito(
-        fontSize: 12,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.3,
-        color: AppColors.textPrimaryDark,
-        height: 1.4,
-      ),
-      labelSmall: GoogleFonts.nunito(
-        fontSize: 11,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.3,
-        color: AppColors.textSecondaryDark,
-        height: 1.4,
-      ),
+    textTheme: GoogleFonts.interTextTheme().copyWith(
+      displayLarge: GoogleFonts.inter(fontSize: 40, fontWeight: FontWeight.w800, letterSpacing: -1.5, color: AppColors.textPrimaryDark, height: 1.1),
+      displayMedium: GoogleFonts.inter(fontSize: 32, fontWeight: FontWeight.w700, letterSpacing: -0.5, color: AppColors.textPrimaryDark, height: 1.2),
+      displaySmall: GoogleFonts.inter(fontSize: 28, fontWeight: FontWeight.w700, letterSpacing: -0.25, color: AppColors.textPrimaryDark, height: 1.2),
+      headlineLarge: GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: -0.25, color: AppColors.textPrimaryDark, height: 1.25),
+      headlineMedium: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: 0, color: AppColors.textPrimaryDark, height: 1.3),
+      headlineSmall: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600, letterSpacing: 0, color: AppColors.textPrimaryDark, height: 1.35),
+      titleLarge: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w700, letterSpacing: 0, color: AppColors.textPrimaryDark, height: 1.4),
+      titleMedium: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600, letterSpacing: 0.1, color: AppColors.textPrimaryDark, height: 1.4),
+      titleSmall: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, letterSpacing: 0.1, color: AppColors.textPrimaryDark, height: 1.4),
+      bodyLarge: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.15, color: AppColors.textPrimaryDark, height: 1.5),
+      bodyMedium: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: 0.15, color: AppColors.textSecondaryDark, height: 1.5),
+      bodySmall: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w400, letterSpacing: 0.2, color: AppColors.textSecondaryDark, height: 1.5),
+      labelLarge: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, letterSpacing: 0.1, color: AppColors.textPrimaryDark, height: 1.4),
+      labelMedium: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, letterSpacing: 0.25, color: AppColors.textSecondaryDark, height: 1.4),
+      labelSmall: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w500, letterSpacing: 0.3, color: AppColors.textTertiaryDark, height: 1.4),
     ),
 
-    // Card theme - Subtle elevation in dark
     cardTheme: CardThemeData(
-      elevation: AppColors.elevationCardDark,
-      shadowColor: Colors.black.withOpacity(0.3),
+      elevation: 0,
       color: AppColors.surfaceDark,
       surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusCard),
+        borderRadius: BorderRadius.circular(AppColors.radiusMD),
+        side: BorderSide(color: AppColors.dividerDark, width: 1),
       ),
     ),
 
-    // App bar theme
     appBarTheme: AppBarTheme(
-      centerTitle: true,
+      centerTitle: false,
       elevation: 0,
-      scrolledUnderElevation: AppColors.elevationAppBarScrolled,
+      scrolledUnderElevation: 0.5,
       backgroundColor: AppColors.backgroundDark,
       surfaceTintColor: Colors.transparent,
       foregroundColor: AppColors.textPrimaryDark,
-      titleTextStyle: GoogleFonts.nunito(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.2,
-        color: AppColors.textPrimaryDark,
-      ),
-      iconTheme: IconThemeData(
-        color: AppColors.textPrimaryDark,
-        size: AppColors.iconMedium,
-      ),
+      titleTextStyle: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w700, letterSpacing: -0.25, color: AppColors.textPrimaryDark),
+      iconTheme: IconThemeData(color: AppColors.textPrimaryDark, size: 24),
     ),
 
-    // Button themes - Warm golden tan for visibility in dark mode
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(120, 52),
-        elevation: AppColors.elevationButton,
-        shadowColor: AppColors.goldenTan.withOpacity(0.2),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        ),
-        backgroundColor: AppColors.goldenTan,
-        foregroundColor: AppColors.warmBrownDark,
-        textStyle: GoogleFonts.nunito(
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 0.2,
-        ),
+        minimumSize: const Size(120, 48),
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppColors.radiusSM)),
+        backgroundColor: AppColors.excelAccent,
+        foregroundColor: Colors.white,
+        textStyle: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600),
       ),
     ),
 
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        minimumSize: Size(120, 52),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        ),
-        side: BorderSide(color: AppColors.goldenTan, width: 1.5),
-        foregroundColor: AppColors.goldenTan,
-        textStyle: GoogleFonts.nunito(
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 0.2,
-        ),
+        minimumSize: const Size(120, 48),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppColors.radiusSM)),
+        side: BorderSide(color: AppColors.borderDark, width: 1),
+        foregroundColor: AppColors.textPrimaryDark,
+        textStyle: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600),
       ),
     ),
 
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        minimumSize: Size(64, 48),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        ),
-        foregroundColor: AppColors.goldenTan,
-        textStyle: GoogleFonts.nunito(
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 0.2,
-        ),
+        minimumSize: const Size(64, 44),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppColors.radiusSM)),
+        foregroundColor: AppColors.excelAccent,
+        textStyle: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w600),
       ),
     ),
 
-    // Floating Action Button - Golden tan for visibility
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: AppColors.goldenTan,
-      foregroundColor: AppColors.warmBrownDark,
-      elevation: AppColors.elevationFab,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusLarge),
-      ),
+      backgroundColor: AppColors.excelAccent,
+      foregroundColor: Colors.white,
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppColors.radiusLG)),
     ),
 
-    // Bottom navigation - Warm accents
     navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: AppColors.goldenTan.withOpacity(0.2),
-      height: 68,
+      indicatorColor: AppColors.excelAccent.withValues(alpha: 0.15),
+      height: 64,
       backgroundColor: AppColors.surfaceDark,
       surfaceTintColor: Colors.transparent,
-      elevation: AppColors.elevationBottomNav,
-      shadowColor: Colors.black.withOpacity(0.3),
+      elevation: 0,
       labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>(
         (states) {
           if (states.contains(WidgetState.selected)) {
-            return GoogleFonts.nunito(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: AppColors.goldenTan,
-            );
+            return GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.excelAccent);
           }
-          return GoogleFonts.nunito(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-            color: AppColors.textSecondaryDark,
-          );
+          return GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textSecondaryDark);
         },
       ),
       iconTheme: WidgetStateProperty.resolveWith<IconThemeData?>(
         (states) {
           if (states.contains(WidgetState.selected)) {
-            return IconThemeData(
-              color: AppColors.goldenTan,
-              size: AppColors.iconMedium,
-            );
+            return IconThemeData(color: AppColors.excelAccent, size: 24);
           }
-          return IconThemeData(
-            color: AppColors.textSecondaryDark,
-            size: AppColors.iconMedium,
-          );
+          return IconThemeData(color: AppColors.textSecondaryDark, size: 24);
         },
       ),
     ),
 
-    // Input decoration - Warm focus border
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.surfaceDarkAlt,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        borderSide: BorderSide(color: AppColors.dividerDark),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        borderSide: BorderSide(color: AppColors.dividerDark),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        borderSide: BorderSide(color: AppColors.goldenTan, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusButton),
-        borderSide: BorderSide(color: AppColors.errorDark),
-      ),
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: AppColors.spacingMedium,
-        vertical: AppColors.spacingMedium,
-      ),
-      hintStyle: GoogleFonts.nunito(color: AppColors.textTertiaryDark),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppColors.radiusSM), borderSide: BorderSide(color: AppColors.borderDark)),
+      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(AppColors.radiusSM), borderSide: BorderSide(color: AppColors.borderDark)),
+      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(AppColors.radiusSM), borderSide: BorderSide(color: AppColors.excelAccent, width: 2)),
+      errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(AppColors.radiusSM), borderSide: BorderSide(color: AppColors.errorDark)),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      hintStyle: GoogleFonts.inter(color: AppColors.textTertiaryDark, fontSize: 14),
     ),
 
-    // Chip theme - Warm selection
     chipTheme: ChipThemeData(
       backgroundColor: AppColors.surfaceDarkAlt,
-      selectedColor: AppColors.goldenTan.withOpacity(0.2),
-      labelStyle: GoogleFonts.nunito(
-        color: AppColors.textPrimaryDark,
-        fontSize: 13,
-        fontWeight: FontWeight.w500,
-      ),
-      secondaryLabelStyle: GoogleFonts.nunito(color: AppColors.goldenTan),
+      selectedColor: AppColors.excelAccent.withValues(alpha: 0.2),
+      labelStyle: GoogleFonts.inter(color: AppColors.textPrimaryDark, fontSize: 13, fontWeight: FontWeight.w500),
+      secondaryLabelStyle: GoogleFonts.inter(color: AppColors.excelAccent),
       brightness: Brightness.dark,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusChip),
-      ),
-      side: BorderSide(color: Colors.transparent),
-      padding: EdgeInsets.symmetric(
-        horizontal: AppColors.spacingSmall,
-        vertical: AppColors.spacingXSmall,
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppColors.radiusFull), side: BorderSide(color: AppColors.borderDark)),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     ),
 
-    // Progress indicator - Golden tan
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: AppColors.goldenTan,
-      linearTrackColor: AppColors.goldenTan.withOpacity(0.2),
-      circularTrackColor: AppColors.goldenTan.withOpacity(0.2),
+      color: AppColors.excelAccent,
+      linearTrackColor: AppColors.excelAccent.withValues(alpha: 0.2),
+      circularTrackColor: AppColors.excelAccent.withValues(alpha: 0.2),
     ),
 
-    // Slider theme - Warm golden
     sliderTheme: SliderThemeData(
-      activeTrackColor: AppColors.goldenTan,
-      inactiveTrackColor: AppColors.goldenTan.withOpacity(0.25),
-      thumbColor: AppColors.goldenTan,
-      overlayColor: AppColors.goldenTan.withOpacity(0.1),
+      activeTrackColor: AppColors.excelAccent,
+      inactiveTrackColor: AppColors.excelAccent.withValues(alpha: 0.25),
+      thumbColor: AppColors.excelAccent,
+      overlayColor: AppColors.excelAccent.withValues(alpha: 0.1),
       trackHeight: 4,
-      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8),
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
     ),
 
-    // Divider theme
-    dividerTheme: DividerThemeData(
-      color: AppColors.dividerDark,
-      thickness: 1,
-      space: AppColors.spacingMedium,
-    ),
+    dividerTheme: DividerThemeData(color: AppColors.dividerDark, thickness: 1, space: 1),
 
-    // Dialog theme
     dialogTheme: DialogThemeData(
       backgroundColor: AppColors.surfaceDark,
-      elevation: AppColors.elevationDialog,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusXLarge),
-      ),
+      elevation: 16,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppColors.radiusLG)),
     ),
 
-    // Bottom sheet theme
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: AppColors.surfaceDark,
-      elevation: AppColors.elevationDialog,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppColors.radiusXLarge),
-        ),
-      ),
+      elevation: 8,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(AppColors.radiusXL))),
     ),
 
-    // Snackbar theme
     snackBarTheme: SnackBarThemeData(
       backgroundColor: AppColors.surfaceDarkAlt,
-      contentTextStyle: GoogleFonts.nunito(color: AppColors.textPrimaryDark),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusCard),
-      ),
+      contentTextStyle: GoogleFonts.inter(color: AppColors.textPrimaryDark, fontSize: 14),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppColors.radiusSM)),
       behavior: SnackBarBehavior.floating,
     ),
 
-    // Switch theme - Warm golden toggle
     switchTheme: SwitchThemeData(
-      thumbColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.selected)) {
-            return AppColors.goldenTan;
-          }
-          return AppColors.textTertiaryDark;
-        },
-      ),
-      trackColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.selected)) {
-            return AppColors.goldenTan.withOpacity(0.4);
-          }
-          return AppColors.dividerDark;
-        },
-      ),
+      thumbColor: WidgetStateProperty.resolveWith<Color?>((states) => states.contains(WidgetState.selected) ? Colors.white : AppColors.textTertiaryDark),
+      trackColor: WidgetStateProperty.resolveWith<Color?>((states) => states.contains(WidgetState.selected) ? AppColors.excelAccent : AppColors.dividerDark),
     ),
 
-    // Checkbox theme - Golden tan
     checkboxTheme: CheckboxThemeData(
-      fillColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.selected)) {
-            return AppColors.goldenTan;
-          }
-          return Colors.transparent;
-        },
-      ),
-      checkColor: WidgetStateProperty.all(AppColors.warmBrownDark),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
-      ),
+      fillColor: WidgetStateProperty.resolveWith<Color?>((states) => states.contains(WidgetState.selected) ? AppColors.excelAccent : Colors.transparent),
+      checkColor: WidgetStateProperty.all(Colors.white),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      side: BorderSide(color: AppColors.borderDark, width: 1.5),
     ),
 
-    // Radio theme - Golden tan
     radioTheme: RadioThemeData(
-      fillColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.selected)) {
-            return AppColors.goldenTan;
-          }
-          return AppColors.textSecondaryDark;
-        },
-      ),
+      fillColor: WidgetStateProperty.resolveWith<Color?>((states) => states.contains(WidgetState.selected) ? AppColors.excelAccent : AppColors.textSecondaryDark),
     ),
 
-    // List tile theme
     listTileTheme: ListTileThemeData(
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: AppColors.spacingMedium,
-        vertical: AppColors.spacingSmall,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppColors.radiusCard),
-      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppColors.radiusMD)),
     ),
 
-    // Icon theme
-    iconTheme: IconThemeData(
-      color: AppColors.textSecondaryDark,
-      size: AppColors.iconMedium,
-    ),
-
-    // Primary icon theme - Golden tan
-    primaryIconTheme: IconThemeData(
-      color: AppColors.goldenTan,
-      size: AppColors.iconMedium,
-    ),
+    iconTheme: IconThemeData(color: AppColors.textSecondaryDark, size: 24),
+    primaryIconTheme: IconThemeData(color: AppColors.excelAccent, size: 24),
   );
 }

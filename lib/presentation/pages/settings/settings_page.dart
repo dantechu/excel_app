@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 import 'package:excel_app/core/services/premium_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +29,7 @@ class SettingsPage extends StatelessWidget {
         backgroundColor: theme.colorScheme.surface,
         body: CustomScrollView(
         slivers: [
-          // Modern app bar with glassmorphism
+          // Clean app bar
           SliverAppBar(
             floating: true,
             snap: true,
@@ -40,23 +39,6 @@ class SettingsPage extends StatelessWidget {
             systemOverlayStyle: isDark
                 ? SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent)
                 : SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
-            flexibleSpace: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        theme.colorScheme.surface.withValues(alpha: 0.9),
-                        theme.colorScheme.surface.withValues(alpha: 0.7),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
             title: Text(
               AppLocalizations.of(context)?.settings ?? 'Settings',
               style: theme.textTheme.titleLarge?.copyWith(
@@ -129,26 +111,23 @@ class SettingsPage extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: isDark
-                ? Colors.white.withValues(alpha: 0.06)
-                : Colors.white.withValues(alpha: 0.8),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.08)
-                  : theme.colorScheme.outline.withValues(alpha: 0.08),
-              width: 1,
-            ),
-          ),
-          child: child,
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.surfaceDark : Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+          width: 1,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: isDark ? 0.15 : 0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
+      child: child,
     );
   }
 
@@ -192,58 +171,39 @@ class SettingsPage extends StatelessWidget {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
-      builder: (dialogContext) => ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: isDark
-                    ? [
-                        Colors.white.withValues(alpha: 0.15),
-                        Colors.white.withValues(alpha: 0.08),
-                      ]
-                    : [
-                        Colors.white.withValues(alpha: 0.98),
-                        Colors.white.withValues(alpha: 0.95),
-                      ],
+      backgroundColor: isDark ? AppColors.surfaceDark : Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (dialogContext) => Container(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(2),
               ),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  AppLocalizations.of(context)?.theme ?? 'Theme',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: -0.5,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                _buildThemeOption(context, dialogContext, AppThemeMode.light, currentMode, Icons.light_mode_rounded, AppLocalizations.of(context)?.light ?? 'Light'),
-                const SizedBox(height: 12),
-                _buildThemeOption(context, dialogContext, AppThemeMode.dark, currentMode, Icons.dark_mode_rounded, AppLocalizations.of(context)?.dark ?? 'Dark'),
-                const SizedBox(height: 12),
-                _buildThemeOption(context, dialogContext, AppThemeMode.system, currentMode, Icons.settings_suggest_rounded, AppLocalizations.of(context)?.system ?? 'System'),
-                SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
-              ],
+            const SizedBox(height: 20),
+            Text(
+              AppLocalizations.of(context)?.theme ?? 'Theme',
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+                letterSpacing: -0.5,
+              ),
             ),
-          ),
+            const SizedBox(height: 24),
+            _buildThemeOption(context, dialogContext, AppThemeMode.light, currentMode, Icons.light_mode_rounded, AppLocalizations.of(context)?.light ?? 'Light'),
+            const SizedBox(height: 12),
+            _buildThemeOption(context, dialogContext, AppThemeMode.dark, currentMode, Icons.dark_mode_rounded, AppLocalizations.of(context)?.dark ?? 'Dark'),
+            const SizedBox(height: 12),
+            _buildThemeOption(context, dialogContext, AppThemeMode.system, currentMode, Icons.settings_suggest_rounded, AppLocalizations.of(context)?.system ?? 'System'),
+            SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
+          ],
         ),
       ),
     );
@@ -369,34 +329,17 @@ class SettingsPage extends StatelessWidget {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
+      backgroundColor: isDark ? AppColors.surfaceDark : Colors.white,
       isScrollControlled: true,
-      builder: (dialogContext) => ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.7,
-            ),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: isDark
-                    ? [
-                        Colors.white.withValues(alpha: 0.15),
-                        Colors.white.withValues(alpha: 0.08),
-                      ]
-                    : [
-                        Colors.white.withValues(alpha: 0.98),
-                        Colors.white.withValues(alpha: 0.95),
-                      ],
-              ),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-            ),
-            child: Column(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (dialogContext) => Container(
+        padding: const EdgeInsets.all(24),
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.7,
+        ),
+        child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
@@ -496,8 +439,6 @@ class SettingsPage extends StatelessWidget {
                 SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
               ],
             ),
-          ),
-        ),
       ),
     );
   }
@@ -667,98 +608,72 @@ class SettingsPage extends StatelessWidget {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: isDark
-                    ? [
-                        Colors.white.withValues(alpha: 0.15),
-                        Colors.white.withValues(alpha: 0.08),
-                      ]
-                    : [
-                        Colors.white.withValues(alpha: 0.98),
-                        Colors.white.withValues(alpha: 0.95),
-                      ],
+      backgroundColor: isDark ? AppColors.surfaceDark : Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(2),
               ),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        theme.colorScheme.primary.withValues(alpha: 0.2),
-                        theme.colorScheme.primary.withValues(alpha: 0.1),
-                      ],
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.person_rounded,
-                    size: 40,
-                    color: theme.colorScheme.primary,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  AppLocalizations.of(context)?.johnSaxxon ?? 'John Saxxon',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: -0.5,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    'Certified Tai Chi Instructor',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.primary,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  AppLocalizations.of(context)?.johnSaxxonBio ??
-                      'John Saxxon is a certified Tai Chi instructor with over 20 years of experience. '
-                          'He has trained thousands of students worldwide in the art of Tai Chi and meditation.',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: MediaQuery.of(context).padding.bottom + 24),
-              ],
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.primary.withValues(alpha: 0.12),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.person_rounded,
+                size: 40,
+                color: theme.colorScheme.primary,
+              ),
             ),
-          ),
+            const SizedBox(height: 16),
+            Text(
+              AppLocalizations.of(context)?.johnSaxxon ?? 'Excel Training Team',
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+                letterSpacing: -0.5,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                'Microsoft Excel Experts',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              AppLocalizations.of(context)?.johnSaxxonBio ??
+                  'Our team of certified Microsoft Excel experts brings years of experience in spreadsheet training. '
+                      'We have helped thousands of professionals master Excel for their careers.',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: MediaQuery.of(context).padding.bottom + 24),
+          ],
         ),
       ),
     );
@@ -770,120 +685,98 @@ class SettingsPage extends StatelessWidget {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: isDark
-                    ? [
-                        Colors.white.withValues(alpha: 0.15),
-                        Colors.white.withValues(alpha: 0.08),
-                      ]
-                    : [
-                        Colors.white.withValues(alpha: 0.98),
-                        Colors.white.withValues(alpha: 0.95),
-                      ],
+      backgroundColor: isDark ? AppColors.surfaceDark : Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(2),
               ),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                5,
+                (index) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Icon(
+                    Icons.star_rounded,
+                    size: 32,
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              AppLocalizations.of(context)?.rateOurApp ?? 'Enjoying the App?',
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+                letterSpacing: -0.5,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              AppLocalizations.of(context)?.rateAppMessage ??
+                  'Your feedback helps us improve the app for everyone. Please take a moment to rate us!',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            Row(
               children: [
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    5,
-                    (index) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: Icon(
-                        Icons.star_rounded,
-                        size: 32,
-                        color: AppColors.goldenTan,
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
+                    child: Text(AppLocalizations.of(context)?.later ?? 'Later'),
                   ),
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  AppLocalizations.of(context)?.rateOurApp ?? 'Enjoying the App?',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: -0.5,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  AppLocalizations.of(context)?.rateAppMessage ??
-                      'Your feedback helps us improve the app for everyone. Please take a moment to rate us!',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          side: BorderSide(
-                            color: theme.colorScheme.outline.withValues(alpha: 0.3),
-                          ),
-                        ),
-                        child: Text(AppLocalizations.of(context)?.later ?? 'Later'),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: FilledButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _launchAppStore(context);
+                    },
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: FilledButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          _launchAppStore(context);
-                        },
-                        style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                        ),
-                        child: Text(AppLocalizations.of(context)?.rateNow ?? 'Rate Now'),
-                      ),
-                    ),
-                  ],
+                    child: Text(AppLocalizations.of(context)?.rateNow ?? 'Rate Now'),
+                  ),
                 ),
-                SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
               ],
             ),
-          ),
+            SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
+          ],
         ),
       ),
     );
   }
 
   void _launchEmail(String email) async {
-    final uri = Uri.parse('mailto:$email?subject=Tai Chi App Support');
+    final uri = Uri.parse('mailto:$email?subject=Excel Training App Support');
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     }
@@ -930,127 +823,77 @@ class SettingsPage extends StatelessWidget {
       builder: (context, premiumState) {
         final isPremium = PremiumService().isPremium;
 
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: isPremium
-                      ? [
-                          AppColors.accentSage.withValues(alpha: isDark ? 0.35 : 0.2),
-                          AppColors.accentSage.withValues(alpha: isDark ? 0.2 : 0.1),
-                        ]
-                      : [
-                          AppColors.goldenTan.withValues(alpha: isDark ? 0.4 : 0.25),
-                          AppColors.goldenTanLight.withValues(alpha: isDark ? 0.2 : 0.15),
-                        ],
-                ),
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color: isPremium
-                      ? AppColors.accentSage.withValues(alpha: 0.4)
-                      : AppColors.goldenTan.withValues(alpha: 0.5),
-                  width: 1.5,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: (isPremium ? AppColors.accentSage : AppColors.goldenTan).withValues(alpha: 0.2),
-                    blurRadius: 20,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    final isPremiumUser = PremiumService().isPremium;
-                    if (isPremiumUser) {
-                      Navigator.of(context).pushNamed('/premium-unlocked');
-                    } else {
-                      Navigator.of(context).pushNamed('/premium');
-                    }
-                  },
-                  borderRadius: BorderRadius.circular(24),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: isPremium
-                                  ? [AppColors.accentSage, AppColors.accentSage.withValues(alpha: 0.8)]
-                                  : [AppColors.goldenTan, AppColors.goldenTanDark],
-                            ),
-                            borderRadius: BorderRadius.circular(16),
-                            boxShadow: [
-                              BoxShadow(
-                                color: (isPremium ? AppColors.accentSage : AppColors.goldenTan).withValues(alpha: 0.4),
-                                blurRadius: 12,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            isPremium ? Icons.workspace_premium_rounded : Icons.diamond_rounded,
-                            color: Colors.white,
-                            size: 26,
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                isPremium
-                                    ? (AppLocalizations.of(context)?.premiumStatusTitle ?? 'Premium Member')
-                                    : (AppLocalizations.of(context)?.premiumTitle ?? 'Unlock Premium'),
-                                style: theme.textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: -0.3,
-                                  color: isPremium
-                                      ? (isDark ? AppColors.accentSage : AppColors.warmBrownDark)
-                                      : (isDark ? AppColors.goldenTanLight : AppColors.warmBrownDark),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                isPremium
-                                    ? (AppLocalizations.of(context)?.premiumStatusSubtitle ?? 'Unlimited access to all features')
-                                    : (AppLocalizations.of(context)?.premiumSubtitle ?? 'Get unlimited access'),
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: isPremium
-                                      ? (isDark ? AppColors.accentSage.withValues(alpha: 0.9) : AppColors.warmBrown)
-                                      : (isDark ? AppColors.goldenTan : AppColors.warmBrown.withValues(alpha: 0.8)),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: (isPremium ? AppColors.accentSage : AppColors.goldenTan).withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Icon(
-                            isPremium ? Icons.check_circle_rounded : Icons.arrow_forward_ios_rounded,
-                            size: 18,
-                            color: isPremium ? AppColors.accentSage : AppColors.goldenTan,
-                          ),
-                        ),
-                      ],
+        return Container(
+          decoration: BoxDecoration(
+            color: isPremium
+                ? theme.colorScheme.primary.withValues(alpha: isDark ? 0.15 : 0.1)
+                : theme.colorScheme.primary.withValues(alpha: isDark ? 0.2 : 0.12),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: theme.colorScheme.primary.withValues(alpha: 0.3),
+              width: 1,
+            ),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                final isPremiumUser = PremiumService().isPremium;
+                if (isPremiumUser) {
+                  Navigator.of(context).pushNamed('/premium-unlocked');
+                } else {
+                  Navigator.of(context).pushNamed('/premium');
+                }
+              },
+              borderRadius: BorderRadius.circular(16),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(
+                        isPremium ? Icons.workspace_premium_rounded : Icons.diamond_rounded,
+                        color: Colors.white,
+                        size: 24,
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            isPremium
+                                ? (AppLocalizations.of(context)?.premiumStatusTitle ?? 'Premium Member')
+                                : (AppLocalizations.of(context)?.premiumTitle ?? 'Unlock Premium'),
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: theme.colorScheme.onSurface,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            isPremium
+                                ? (AppLocalizations.of(context)?.premiumStatusSubtitle ?? 'Unlimited access to all features')
+                                : (AppLocalizations.of(context)?.premiumSubtitle ?? 'Get unlimited access'),
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      isPremium ? Icons.check_circle_rounded : Icons.chevron_right_rounded,
+                      size: 20,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -5,17 +5,16 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:excel_app/main.dart';
 
 void main() {
-  testWidgets('Qi Gong app smoke test', (WidgetTester tester) async {
+  testWidgets('Excel Training app smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const TaiChiWorkoutApp());
+    await tester.pumpWidget(const ExcelTrainingApp());
 
     // Verify that our splash screen appears.
-    expect(find.text('Qi Gong Healing Workout'), findsOneWidget);
+    expect(find.text('Excel Training'), findsOneWidget);
   });
 }

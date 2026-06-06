@@ -2,140 +2,144 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // ═══════════════════════════════════════════════════════════════════════════
-  // PRIMARY COLORS - Warm Brown (Grounding, Stability, Natural Healing)
-  // Inspired by the yin-yang dark portion of the app icon
+  // PRIMARY COLORS - Excel Green (Professional, Productive, Modern)
+  // Microsoft Excel brand colors
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color warmBrown = Color(0xFF4A3728);            // Rich chocolate brown
-  static const Color warmBrownLight = Color(0xFF6B5344);       // Lighter warm brown
-  static const Color warmBrownDark = Color(0xFF2E2118);        // Deep brown
-  static const Color warmBrownSoft = Color(0xFF7A6455);        // Soft brown
+  static const Color excelGreen = Color(0xFF107C41);            // Primary Excel green
+  static const Color excelGreenLight = Color(0xFF1D9E53);       // Lighter Excel green
+  static const Color excelGreenDark = Color(0xFF0B5A2F);        // Deep Excel green
+  static const Color excelGreenSoft = Color(0xFF33C481);        // Soft accent green
+
+  // Legacy aliases for compatibility (maps to new colors)
+  static const Color warmBrown = excelGreen;
+  static const Color warmBrownLight = excelGreenLight;
+  static const Color warmBrownDark = excelGreenDark;
+  static const Color warmBrownSoft = excelGreenSoft;
+  static const Color deepNavy = excelGreen;
+  static const Color deepNavyLight = excelGreenLight;
+  static const Color deepNavyDark = excelGreenDark;
+  static const Color deepNavySoft = excelGreenSoft;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SECONDARY COLORS - Excel Accent Green (Highlights, Actions)
+  // ═══════════════════════════════════════════════════════════════════════════
+  static const Color excelAccent = Color(0xFF21A366);           // Accent green
+  static const Color excelAccentLight = Color(0xFF33C481);      // Light accent
+  static const Color excelAccentDark = Color(0xFF185C37);       // Dark accent
 
   // Legacy aliases for compatibility
-  static const Color deepNavy = warmBrown;
-  static const Color deepNavyLight = warmBrownLight;
-  static const Color deepNavyDark = warmBrownDark;
-  static const Color deepNavySoft = warmBrownSoft;
+  static const Color goldenTan = excelAccent;
+  static const Color goldenTanLight = excelAccentLight;
+  static const Color goldenTanDark = excelAccentDark;
+  static const Color softTeal = excelAccent;
+  static const Color softTealLight = excelAccentLight;
+  static const Color softTealDark = excelAccentDark;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // SECONDARY COLORS - Golden Tan (Warmth, Energy, Chi Flow)
-  // Inspired by the golden border of the app icon
+  // TERTIARY COLORS - Office Gray (Professional, Clean)
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color goldenTan = Color(0xFFC4A55A);            // Warm golden tan
-  static const Color goldenTanLight = Color(0xFFDBC78A);       // Light golden
-  static const Color goldenTanDark = Color(0xFFA68B3D);        // Deep golden
-
-  // Legacy aliases for compatibility
-  static const Color softTeal = goldenTan;
-  static const Color softTealLight = goldenTanLight;
-  static const Color softTealDark = goldenTanDark;
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // TERTIARY COLORS - Soft Cream (Serenity, Balance, Purity)
-  // Inspired by the cream background of the app icon
-  // ═══════════════════════════════════════════════════════════════════════════
-  static const Color softCream = Color(0xFFE8D4B0);            // Warm cream
-  static const Color softCreamLight = Color(0xFFF5EDE0);       // Very light cream
-  static const Color softCreamDark = Color(0xFFD4BF96);        // Darker cream
+  static const Color officeGray = Color(0xFFE6E6E6);            // Light gray
+  static const Color officeGrayLight = Color(0xFFF3F3F3);       // Very light gray
+  static const Color officeGrayDark = Color(0xFFD0D0D0);        // Medium gray
 
   // Legacy aliases for compatibility
-  static const Color warmGold = goldenTan;
-  static const Color warmGoldLight = goldenTanLight;
-  static const Color warmGoldDark = goldenTanDark;
+  static const Color softCream = officeGray;
+  static const Color softCreamLight = officeGrayLight;
+  static const Color softCreamDark = officeGrayDark;
+  static const Color warmGold = excelAccent;
+  static const Color warmGoldLight = excelAccentLight;
+  static const Color warmGoldDark = excelAccentDark;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // BACKGROUND COLORS - Warm, Inviting Tones
+  // BACKGROUND COLORS - Subtle Off-White (Udemy-style)
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color backgroundLight = Color(0xFFFAF6F0);      // Warm off-white
-  static const Color backgroundLightAlt = Color(0xFFF0E8DC);   // Slightly deeper warm cream
-  static const Color backgroundDark = Color(0xFF1E1814);       // Deep warm black-brown
-  static const Color surfaceDark = Color(0xFF2A2420);          // Elevated dark surface
-  static const Color surfaceDarkAlt = Color(0xFF3A3430);       // Cards in dark mode
+  static const Color backgroundLight = Color(0xFFF7F9FA);       // Subtle off-white (Udemy-like)
+  static const Color backgroundLightAlt = Color(0xFFEFEFEF);    // Slightly darker for contrast
+  static const Color cardBackground = Color(0xFFFFFFFF);        // Pure white for cards
+  static const Color backgroundDark = Color(0xFF1A1A1A);        // Rich dark
+  static const Color surfaceDark = Color(0xFF242424);           // Elevated dark surface
+  static const Color surfaceDarkAlt = Color(0xFF2E2E2E);        // Cards in dark mode
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // TEXT COLORS - Warm, Readable
+  // TEXT COLORS - High Contrast, Readable
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color textPrimary = Color(0xFF2E2118);          // Warm dark brown
-  static const Color textSecondary = Color(0xFF6B5C50);        // Muted brown
-  static const Color textTertiary = Color(0xFF9A8B7F);         // Subtle warm hint
-  static const Color textPrimaryDark = Color(0xFFF0E8DC);      // Warm off-white
-  static const Color textSecondaryDark = Color(0xFFC4B8A8);    // Muted cream
-  static const Color textTertiaryDark = Color(0xFF8A7E70);     // Subtle dark mode hint
+  static const Color textPrimary = Color(0xFF1C1D1F);           // Near black (Udemy-like)
+  static const Color textSecondary = Color(0xFF6A6F73);         // Medium gray
+  static const Color textTertiary = Color(0xFF9EA5AB);          // Light gray
+  static const Color textPrimaryDark = Color(0xFFF7F9FA);       // Near white
+  static const Color textSecondaryDark = Color(0xFFB8BBBE);     // Light gray
+  static const Color textTertiaryDark = Color(0xFF6A6F73);      // Medium gray
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // STATUS COLORS - Earthy, Harmonious
+  // STATUS COLORS - Clear, Standard
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color errorLight = Color(0xFFBF6B5A);           // Soft terracotta red
-  static const Color errorDark = Color(0xFFD89080);            // Lighter terracotta for dark
-  static const Color success = Color(0xFF7A9E6B);              // Sage green
-  static const Color successDark = Color(0xFF9ABF8B);          // Lighter sage for dark
-  static const Color warning = Color(0xFFD4A556);              // Warm amber warning
-  static const Color warningDark = Color(0xFFE8C080);          // Lighter amber for dark
-  static const Color info = Color(0xFF8B7355);                 // Warm taupe info
-  static const Color infoDark = Color(0xFFB8A080);             // Lighter taupe for dark
+  static const Color errorLight = Color(0xFFD32F2F);            // Material red
+  static const Color errorDark = Color(0xFFEF5350);             // Lighter red for dark
+  static const Color success = Color(0xFF107C41);               // Excel green (success)
+  static const Color successDark = Color(0xFF33C481);           // Lighter green for dark
+  static const Color warning = Color(0xFFF57C00);               // Orange warning
+  static const Color warningDark = Color(0xFFFFB74D);           // Lighter orange for dark
+  static const Color info = Color(0xFF1976D2);                  // Blue info
+  static const Color infoDark = Color(0xFF64B5F6);              // Lighter blue for dark
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // PREMIUM COLORS - Elegant Gold
+  // PREMIUM COLORS - Professional Gold/Green
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color premiumGold = Color(0xFFC4A55A);          // Warm golden tan
-  static const Color premiumGoldLight = Color(0xFFDBC78A);     // Soft gold
-  static const Color premiumGoldDark = Color(0xFFE8D080);      // Bright gold for dark mode
+  static const Color premiumGold = Color(0xFF107C41);           // Excel green for premium
+  static const Color premiumGoldLight = Color(0xFF33C481);      // Light green
+  static const Color premiumGoldDark = Color(0xFF21A366);       // Accent green for dark mode
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // ACCENT COLORS - Earth Tones for Special Elements
+  // ACCENT COLORS - Office Suite Colors
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color accentTerracotta = Color(0xFFBF8B6B);     // Warm terracotta
-  static const Color accentSage = Color(0xFF8BA37A);           // Sage green (natural healing)
-  static const Color accentGold = Color(0xFFC4A55A);           // Golden accent
-  static const Color accentMocha = Color(0xFF9B8575);          // Soft mocha
+  static const Color accentExcel = Color(0xFF107C41);           // Excel green
+  static const Color accentWord = Color(0xFF2B579A);            // Word blue
+  static const Color accentPowerPoint = Color(0xFFD24726);      // PowerPoint orange
+  static const Color accentOutlook = Color(0xFF0078D4);         // Outlook blue
 
   // Legacy aliases
-  static const Color accentSky = accentMocha;
-  static const Color accentTeal = accentSage;
-  static const Color accentLavender = accentTerracotta;
+  static const Color accentTerracotta = accentPowerPoint;
+  static const Color accentSage = excelGreen;
+  static const Color accentGold = excelAccent;
+  static const Color accentMocha = Color(0xFF6B6B6B);
+  static const Color accentSky = accentOutlook;
+  static const Color accentTeal = excelGreen;
+  static const Color accentLavender = Color(0xFF7B68EE);
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // GRADIENT COLORS - Warm, Organic Flow
+  // GRADIENT COLORS - Subtle, Professional
   // ═══════════════════════════════════════════════════════════════════════════
   static const List<Color> primaryGradient = [
-    Color(0xFF6B5344),                                         // Warm brown light
-    Color(0xFF4A3728),                                         // Warm brown
-    Color(0xFF2E2118),                                         // Warm brown dark
+    Color(0xFF1D9E53),                                          // Excel green light
+    Color(0xFF107C41),                                          // Excel green
+    Color(0xFF0B5A2F),                                          // Excel green dark
   ];
 
-  static const List<Color> breathingGradient = [
-    Color(0xFFDBC78A),                                         // Golden tan light
-    Color(0xFFC4A55A),                                         // Golden tan
-    Color(0xFFA68B3D),                                         // Golden tan dark
-    Color(0xFF4A3728),                                         // Warm brown
+  static const List<Color> excelGradient = [
+    Color(0xFF33C481),                                          // Light green
+    Color(0xFF21A366),                                          // Accent green
+    Color(0xFF107C41),                                          // Primary green
   ];
 
-  static const List<Color> meditationGradient = [
-    Color(0xFF7A6455),                                         // Brown soft
-    Color(0xFF4A3728),                                         // Warm brown
-    Color(0xFF2E2118),                                         // Brown dark
+  static const List<Color> professionalGradient = [
+    Color(0xFF1D9E53),                                          // Light green
+    Color(0xFF107C41),                                          // Primary green
   ];
 
-  static const List<Color> healingGradient = [
-    Color(0xFFE8D4B0),                                         // Soft cream
-    Color(0xFFC4A55A),                                         // Golden tan
-    Color(0xFF4A3728),                                         // Warm brown
+  static const List<Color> subtleGradient = [
+    Color(0xFFFFFFFF),                                          // White
+    Color(0xFFF7F9FA),                                          // Off-white
   ];
 
-  static const List<Color> sunriseGradient = [
-    Color(0xFFF5EDE0),                                         // Cream light
-    Color(0xFFDBC78A),                                         // Golden tan light
-    Color(0xFFC4A55A),                                         // Golden tan
-  ];
-
-  static const List<Color> oceanGradient = [
-    Color(0xFFE8D4B0),                                         // Soft cream
-    Color(0xFFD4BF96),                                         // Cream dark
-    Color(0xFFC4A55A),                                         // Golden tan
-    Color(0xFF4A3728),                                         // Warm brown
-  ];
+  // Legacy gradient aliases
+  static const List<Color> breathingGradient = excelGradient;
+  static const List<Color> meditationGradient = primaryGradient;
+  static const List<Color> healingGradient = professionalGradient;
+  static const List<Color> sunriseGradient = subtleGradient;
+  static const List<Color> oceanGradient = excelGradient;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // SPACING - Generous for Calm Feel
+  // SPACING - Clean Grid System (8px base)
   // ═══════════════════════════════════════════════════════════════════════════
   static const double spacingXSmall = 4.0;
   static const double spacingSmall = 8.0;
@@ -145,42 +149,51 @@ class AppColors {
   static const double spacingXXLarge = 48.0;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // BORDER RADIUS - Soft & Organic
+  // BORDER RADIUS - Consistent System
+  // Use radiusMD (8) for most cards, radiusLG (12) for modals/sheets
   // ═══════════════════════════════════════════════════════════════════════════
-  static const double radiusSmall = 8.0;
-  static const double radiusButton = 12.0;
-  static const double radiusCard = 16.0;
-  static const double radiusChip = 24.0;
-  static const double radiusLarge = 20.0;
-  static const double radiusXLarge = 28.0;
-  static const double radiusCircular = 999.0;
+  static const double radiusXS = 4.0;     // Small elements (badges, tags)
+  static const double radiusSM = 6.0;     // Buttons, inputs
+  static const double radiusMD = 8.0;     // Cards, tiles
+  static const double radiusLG = 12.0;    // Modals, bottom sheets
+  static const double radiusXL = 16.0;    // Large containers
+  static const double radiusFull = 999.0; // Pills, avatars
+
+  // Legacy aliases - all map to consistent values
+  static const double radiusSmall = radiusXS;
+  static const double radiusButton = radiusSM;
+  static const double radiusCard = radiusMD;
+  static const double radiusChip = radiusFull;
+  static const double radiusLarge = radiusLG;
+  static const double radiusXLarge = radiusXL;
+  static const double radiusCircular = radiusFull;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // ELEVATION - Subtle, Soft Shadows
+  // ELEVATION - Minimal, Flat Design
   // ═══════════════════════════════════════════════════════════════════════════
-  static const double elevationCard = 1.0;
-  static const double elevationCardDark = 2.0;
-  static const double elevationButton = 0.5;
-  static const double elevationFab = 4.0;
+  static const double elevationCard = 0.0;
+  static const double elevationCardDark = 0.0;
+  static const double elevationButton = 0.0;
+  static const double elevationFab = 2.0;
   static const double elevationAppBar = 0.0;
   static const double elevationAppBarScrolled = 1.0;
-  static const double elevationBottomNav = 4.0;
+  static const double elevationBottomNav = 0.0;
   static const double elevationDialog = 8.0;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // ANIMATION DURATIONS - Smooth, Calming
+  // ANIMATION DURATIONS - Snappy, Professional
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Duration animationFast = Duration(milliseconds: 200);
-  static const Duration animationMedium = Duration(milliseconds: 350);
-  static const Duration animationSlow = Duration(milliseconds: 500);
-  static const Duration animationGentle = Duration(milliseconds: 800);
+  static const Duration animationFast = Duration(milliseconds: 150);
+  static const Duration animationMedium = Duration(milliseconds: 250);
+  static const Duration animationSlow = Duration(milliseconds: 350);
+  static const Duration animationGentle = Duration(milliseconds: 500);
   static const Duration animationBreathing = Duration(seconds: 4);
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // OPACITY - Soft Layering
+  // OPACITY - Standard Levels
   // ═══════════════════════════════════════════════════════════════════════════
   static const double opacityDisabled = 0.38;
-  static const double opacityLight = 0.12;
+  static const double opacityLight = 0.08;
   static const double opacityMedium = 0.54;
   static const double opacityHigh = 0.87;
 
@@ -196,36 +209,38 @@ class AppColors {
   // ═══════════════════════════════════════════════════════════════════════════
   // VIDEO PLAYER COLORS
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color videoControlsBackground = Color(0xCC1E1814);
-  static const Color videoProgressPlayed = warmBrown;
+  static const Color videoControlsBackground = Color(0xE6000000);
+  static const Color videoProgressPlayed = excelGreen;
   static const Color videoProgressBuffered = Color(0x4DFFFFFF);
   static const Color videoProgressBackground = Color(0x33FFFFFF);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // AD BANNER COLORS
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color adBannerBackground = Color(0xFFF0E8DC);
-  static const Color adBannerBorder = Color(0xFFE0D4C4);
+  static const Color adBannerBackground = Color(0xFFF7F9FA);
+  static const Color adBannerBorder = Color(0xFFE0E0E0);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SHIMMER COLORS
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color shimmerBase = Color(0xFFE8DED0);
-  static const Color shimmerHighlight = Color(0xFFF5EDE0);
-  static const Color shimmerBaseDark = Color(0xFF3A3430);
-  static const Color shimmerHighlightDark = Color(0xFF4A4440);
+  static const Color shimmerBase = Color(0xFFE8E8E8);
+  static const Color shimmerHighlight = Color(0xFFF5F5F5);
+  static const Color shimmerBaseDark = Color(0xFF2D2D2D);
+  static const Color shimmerHighlightDark = Color(0xFF3D3D3D);
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // DIVIDER COLORS
+  // DIVIDER/BORDER COLORS
   // ═══════════════════════════════════════════════════════════════════════════
-  static const Color dividerLight = Color(0xFFE0D4C4);
-  static const Color dividerDark = Color(0xFF3A3430);
+  static const Color dividerLight = Color(0xFFE4E8EB);          // Subtle border
+  static const Color borderLight = Color(0xFFD1D7DC);           // Visible border (Udemy-like)
+  static const Color dividerDark = Color(0xFF3A3A3A);
+  static const Color borderDark = Color(0xFF4A4A4A);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HELPER METHODS
   // ═══════════════════════════════════════════════════════════════════════════
   static Color withOpacity(Color color, double opacity) {
-    return color.withOpacity(opacity);
+    return color.withValues(alpha: opacity);
   }
 
   static LinearGradient createGradient(
@@ -261,8 +276,8 @@ class AppColors {
       begin: begin,
       end: end,
       colors: [
-        color.withOpacity(0.1),
-        color.withOpacity(0.05),
+        color.withValues(alpha: 0.08),
+        color.withValues(alpha: 0.04),
       ],
     );
   }

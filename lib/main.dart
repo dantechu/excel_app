@@ -53,17 +53,17 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const QiGongHealingWorkoutApp());
+  runApp(const ExcelTrainingApp());
 }
 
-class QiGongHealingWorkoutApp extends StatefulWidget {
-  const QiGongHealingWorkoutApp({super.key});
+class ExcelTrainingApp extends StatefulWidget {
+  const ExcelTrainingApp({super.key});
 
   @override
-  State<QiGongHealingWorkoutApp> createState() => _QiGongHealingWorkoutAppState();
+  State<ExcelTrainingApp> createState() => _ExcelTrainingAppState();
 }
 
-class _QiGongHealingWorkoutAppState extends State<QiGongHealingWorkoutApp> with WidgetsBindingObserver {
+class _ExcelTrainingAppState extends State<ExcelTrainingApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -116,7 +116,7 @@ class _QiGongHealingWorkoutAppState extends State<QiGongHealingWorkoutApp> with 
           return BlocBuilder<LocaleBloc, LocaleState>(
             builder: (context, localeState) {
               return MaterialApp(
-                onGenerateTitle: (context) => AppLocalizations.of(context)?.appName ?? 'Qi Gong Healing Workout',
+                onGenerateTitle: (context) => AppLocalizations.of(context)?.appName ?? 'Excel Training',
                 debugShowCheckedModeBanner: false,
 
                 // Theme configuration
