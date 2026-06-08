@@ -1,0 +1,30 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "qigong-workout",
+                    "appId": "1:3829058758:android:4b81f755651b8f52941bc7",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "qigong-workout",
+                    "appId": "1:3829058758:ios:375d7f7ffec5f2f7941bc7",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "qigong-workout",
+                    "configurations": {
+                        "android": "1:3829058758:android:4b81f755651b8f52941bc7",
+                        "ios": "1:3829058758:ios:375d7f7ffec5f2f7941bc7"
+                    }
+                }
+            }
+        }
+    }
+}
