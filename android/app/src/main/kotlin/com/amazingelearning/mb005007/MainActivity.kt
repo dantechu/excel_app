@@ -1,4 +1,4 @@
-package com.amazingelearning.chikung
+package com.amazingelearning.mb005007
 
 import io.flutter.embedding.android.FlutterActivity
 
