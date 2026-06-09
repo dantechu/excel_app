@@ -79,6 +79,7 @@ class _CategoryChipState extends State<CategoryChip>
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeOut,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            alignment: Alignment.center,
             decoration: BoxDecoration(
               color: widget.isSelected
                   ? theme.colorScheme.primary
@@ -105,7 +106,6 @@ class _CategoryChipState extends State<CategoryChip>
                         : AppColors.textSecondary,
                 fontWeight: widget.isSelected ? FontWeight.w600 : FontWeight.w500,
                 fontSize: 13,
-                height: 1.0,
               ),
               textAlign: TextAlign.center,
             ),
