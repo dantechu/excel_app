@@ -182,7 +182,7 @@ class _SplashPageState extends State<SplashPage>
             FadeTransition(
               opacity: _fadeAnimation,
               child: Text(
-                'Excel Training',
+                'Excel Mastery',
                 style: theme.textTheme.headlineLarge?.copyWith(
                   color: theme.colorScheme.onPrimary,
                   fontWeight: FontWeight.bold,
