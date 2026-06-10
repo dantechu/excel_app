@@ -9,7 +9,7 @@ class AppConstants {
   // Contact Information
   static const String supportEmail = 'dante@amazingelearning.com';
   static const String supportPhone = '1(650)692-2500';
-  static const String website = 'stepbysteplearn.com';
+  static const String website = 'amazingelearning.com';
 
   // URLs
   static const String privacyPolicyUrl = 'https://amazingelearning.com/privacy-policy/';
