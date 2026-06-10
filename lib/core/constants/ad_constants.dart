@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 
 class AdConstants {
   // Production Banner Ads
-  static const String androidBannerId = 'ca-app-pub-9740790965972178/2276608078';
-  static const String iosBannerId = 'ca-app-pub-9740790965972178/2276608078';
+  static const String androidBannerId = 'ca-app-pub-9740790965972178/7987836878';
+  static const String iosBannerId = 'ca-app-pub-9740790965972178/7987836878';
 
   // Test Ads (for development)
   static const String testAndroidBannerId = 'ca-app-pub-3940256099942544/6300978111';
