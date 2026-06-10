@@ -10,6 +10,7 @@ import 'core/theme/app_theme.dart';
 import 'injection_container.dart' as di;
 import 'presentation/bloc/locale/locale_bloc.dart';
 import 'presentation/bloc/locale/locale_event.dart';
+
 import 'presentation/bloc/locale/locale_state.dart';
 import 'presentation/bloc/theme/theme_bloc.dart';
 import 'presentation/bloc/theme/theme_event.dart';
