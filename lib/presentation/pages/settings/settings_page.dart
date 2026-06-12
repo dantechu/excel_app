@@ -450,10 +450,10 @@ class SettingsPage extends StatelessWidget {
         children: [
           _buildModernListItem(
             context,
-            icon: Icons.person_rounded,
-            title: AppLocalizations.of(context)?.instructor ?? 'Instructor',
-            subtitle: AppLocalizations.of(context)?.johnSaxxon ?? 'John Saxxon',
-            onTap: () => _showInstructorDialog(context),
+            icon: Icons.apps_rounded,
+            title: 'More Apps',
+            subtitle: 'Try more amazing apps',
+            onTap: () => _launchUrl(AppConstants.appStoreDeveloperUrl),
           ),
           _buildModernListItem(
             context,
@@ -597,83 +597,6 @@ class SettingsPage extends StatelessWidget {
                 ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  void _showInstructorDialog(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: isDark ? AppColors.surfaceDark : Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primary.withValues(alpha: 0.12),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.person_rounded,
-                size: 40,
-                color: theme.colorScheme.primary,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              AppLocalizations.of(context)?.johnSaxxon ?? 'Excel Training Team',
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w700,
-                letterSpacing: -0.5,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primary.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                'Microsoft Excel Experts',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.primary,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              AppLocalizations.of(context)?.johnSaxxonBio ??
-                  'Our team of certified Microsoft Excel experts brings years of experience in spreadsheet training. '
-                      'We have helped thousands of professionals master Excel for their careers.',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                height: 1.5,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: MediaQuery.of(context).padding.bottom + 24),
-          ],
         ),
       ),
     );
