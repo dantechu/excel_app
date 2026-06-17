@@ -287,13 +287,17 @@ class _PremiumPageState extends State<PremiumPage> {
   }
 
   Widget _buildButtons(ThemeData theme, PremiumState state) {
+    final isPurchasing = state is PremiumPurchasing;
+    final isRestoring = state is PremiumRestoring;
+    final isProcessing = isPurchasing || isRestoring || state is PremiumLoading;
+
     return Column(
       children: [
         SizedBox(
           width: double.infinity,
           height: 52,
           child: FilledButton.icon(
-            onPressed: state is PremiumLoading
+            onPressed: isProcessing
                 ? null
                 : () {
                     context.read<PremiumBloc>().add(const PurchasePremiumRequested());
@@ -305,10 +309,10 @@ class _PremiumPageState extends State<PremiumPage> {
                 borderRadius: BorderRadius.circular(14),
               ),
             ),
-            icon: state is PremiumLoading
+            icon: isPurchasing
                 ? const SizedBox.shrink()
                 : const Icon(Icons.diamond_rounded, size: 20),
-            label: state is PremiumLoading
+            label: isPurchasing
                 ? const SizedBox(
                     height: 20,
                     width: 20,
@@ -329,14 +333,25 @@ class _PremiumPageState extends State<PremiumPage> {
         ),
         const SizedBox(height: 12),
         TextButton.icon(
-          onPressed: () {
-            context.read<PremiumBloc>().add(const RestorePremiumRequested());
-          },
-          icon: Icon(
-            Icons.restore_rounded,
-            size: 18,
-            color: theme.colorScheme.primary,
-          ),
+          onPressed: isProcessing
+              ? null
+              : () {
+                  context.read<PremiumBloc>().add(const RestorePremiumRequested());
+                },
+          icon: isRestoring
+              ? SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
+                  ),
+                )
+              : Icon(
+                  Icons.restore_rounded,
+                  size: 18,
+                  color: theme.colorScheme.primary,
+                ),
           label: Text(
             AppLocalizations.of(context)?.restore ?? 'Restore Purchases',
             style: TextStyle(
