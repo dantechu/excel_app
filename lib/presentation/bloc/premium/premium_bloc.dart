@@ -13,6 +13,10 @@ class PremiumBloc extends Bloc<PremiumEvent, PremiumState> {
   final GetProductDetails getProductDetails;
   final PremiumService _premiumService = PremiumService();
 
+  // Cache product details to preserve across state changes
+  String? _cachedProductPrice;
+  String? _cachedProductTitle;
+
   PremiumBloc({
     required this.purchasePremium,
     required this.restorePurchases,
@@ -54,10 +58,16 @@ class PremiumBloc extends Bloc<PremiumEvent, PremiumState> {
     if (!isActive) {
       final productResult = await getProductDetails(AppConstants.premiumProductId);
       productResult.fold(
-        (failure) => emit(const PremiumInactive()),
+        (failure) => emit(PremiumInactive(
+          productPrice: _cachedProductPrice,
+          productTitle: _cachedProductTitle,
+        )),
         (productDetails) {
           final price = productDetails['price'] as String? ?? AppConstants.premiumPrice;
           final title = productDetails['title'] as String?;
+          // Cache the product details
+          _cachedProductPrice = price;
+          _cachedProductTitle = title;
           emit(PremiumInactive(productPrice: price, productTitle: title));
         },
       );
@@ -68,17 +78,28 @@ class PremiumBloc extends Bloc<PremiumEvent, PremiumState> {
     PurchasePremiumRequested event,
     Emitter<PremiumState> emit,
   ) async {
-    emit(const PremiumPurchasing());
+    emit(PremiumPurchasing(
+      productPrice: _cachedProductPrice,
+      productTitle: _cachedProductTitle,
+    ));
 
     final result = await purchasePremium();
     result.fold(
-      (failure) => emit(PremiumError(failure.message)),
+      (failure) => emit(PremiumError(
+        failure.message,
+        productPrice: _cachedProductPrice,
+        productTitle: _cachedProductTitle,
+      )),
       (success) async {
         if (success) {
           // Get updated status
           final statusResult = await getPremiumStatus();
           statusResult.fold(
-            (failure) => emit(PremiumError(failure.message)),
+            (failure) => emit(PremiumError(
+              failure.message,
+              productPrice: _cachedProductPrice,
+              productTitle: _cachedProductTitle,
+            )),
             (status) {
               // Emit final state based on validity
               if (status.isValidPremium) {
@@ -86,12 +107,19 @@ class PremiumBloc extends Bloc<PremiumEvent, PremiumState> {
                 emit(PremiumActive(status));
               } else {
                 _premiumService.updatePremiumStatus(false);
-                emit(const PremiumInactive());
+                emit(PremiumInactive(
+                  productPrice: _cachedProductPrice,
+                  productTitle: _cachedProductTitle,
+                ));
               }
             },
           );
         } else {
-          emit(const PremiumError('Purchase failed'));
+          emit(PremiumError(
+            'Purchase failed',
+            productPrice: _cachedProductPrice,
+            productTitle: _cachedProductTitle,
+          ));
         }
       },
     );
@@ -101,17 +129,28 @@ class PremiumBloc extends Bloc<PremiumEvent, PremiumState> {
     RestorePremiumRequested event,
     Emitter<PremiumState> emit,
   ) async {
-    emit(const PremiumRestoring());
+    emit(PremiumRestoring(
+      productPrice: _cachedProductPrice,
+      productTitle: _cachedProductTitle,
+    ));
 
     final result = await restorePurchases();
     result.fold(
-      (failure) => emit(PremiumError(failure.message)),
+      (failure) => emit(PremiumError(
+        failure.message,
+        productPrice: _cachedProductPrice,
+        productTitle: _cachedProductTitle,
+      )),
       (restored) async {
         if (restored) {
           // Get updated status
           final statusResult = await getPremiumStatus();
           statusResult.fold(
-            (failure) => emit(PremiumError(failure.message)),
+            (failure) => emit(PremiumError(
+              failure.message,
+              productPrice: _cachedProductPrice,
+              productTitle: _cachedProductTitle,
+            )),
             (status) {
               // Emit final state based on validity
               if (status.isValidPremium) {
@@ -119,12 +158,19 @@ class PremiumBloc extends Bloc<PremiumEvent, PremiumState> {
                 emit(PremiumActive(status));
               } else {
                 _premiumService.updatePremiumStatus(false);
-                emit(const PremiumInactive());
+                emit(PremiumInactive(
+                  productPrice: _cachedProductPrice,
+                  productTitle: _cachedProductTitle,
+                ));
               }
             },
           );
         } else {
-          emit(const PremiumError('No purchases found to restore'));
+          emit(PremiumError(
+            'No purchases found to restore',
+            productPrice: _cachedProductPrice,
+            productTitle: _cachedProductTitle,
+          ));
         }
       },
     );

@@ -36,20 +36,34 @@ class PremiumActive extends PremiumState {
 }
 
 class PremiumPurchasing extends PremiumState {
-  const PremiumPurchasing();
+  final String? productPrice;
+  final String? productTitle;
+
+  const PremiumPurchasing({this.productPrice, this.productTitle});
+
+  @override
+  List<Object?> get props => [productPrice, productTitle];
 }
 
 class PremiumRestoring extends PremiumState {
-  const PremiumRestoring();
+  final String? productPrice;
+  final String? productTitle;
+
+  const PremiumRestoring({this.productPrice, this.productTitle});
+
+  @override
+  List<Object?> get props => [productPrice, productTitle];
 }
 
 class PremiumError extends PremiumState {
   final String message;
+  final String? productPrice;
+  final String? productTitle;
 
-  const PremiumError(this.message);
+  const PremiumError(this.message, {this.productPrice, this.productTitle});
 
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [message, productPrice, productTitle];
 }
 
 class PremiumPurchaseSuccess extends PremiumState {
