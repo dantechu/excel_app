@@ -2,7 +2,7 @@ name: excel_app
 description: "A Qi Gong healing workout and meditation app with video lessons, music player, and breathing exercises."
 publish_to: 'none'
 
-version: 5.0.0+2
+version: 5.0.0+4
 
 environment:
   sdk: ^3.8.0
