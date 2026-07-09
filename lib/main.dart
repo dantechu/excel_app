@@ -17,6 +17,8 @@ import 'presentation/bloc/theme/theme_event.dart';
 import 'presentation/bloc/theme/theme_state.dart';
 import 'presentation/bloc/bookmark/bookmark_bloc.dart';
 import 'presentation/bloc/bookmark/bookmark_event.dart';
+import 'presentation/bloc/lesson_completion/lesson_completion_bloc.dart';
+import 'presentation/bloc/lesson_completion/lesson_completion_event.dart';
 import 'presentation/bloc/premium/premium_bloc.dart';
 import 'presentation/bloc/premium/premium_event.dart';
 import 'presentation/pages/splash/splash_page.dart';
@@ -110,6 +112,9 @@ class _ExcelTrainingAppState extends State<ExcelTrainingApp> with WidgetsBinding
         ),
         BlocProvider<BookmarkBloc>(
           create: (context) => di.sl<BookmarkBloc>()..add(const LoadBookmarks()),
+        ),
+        BlocProvider<LessonCompletionBloc>(
+          create: (context) => di.sl<LessonCompletionBloc>()..add(const LoadCompletions()),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
