@@ -222,7 +222,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
               _buildStatItem(
                 context,
                 icon: Icons.play_circle_outline_rounded,
-                label: AppLocalizations.of(context)?.videos ?? 'Videos',
+                label: AppLocalizations.of(context)?.lessons ?? 'Lessons',
                 value: '${widget.course.metadata.totalVideos}',
               ),
               _buildVerticalDivider(context),
@@ -505,7 +505,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 4),
                 child: Text(
-                  '${AppLocalizations.of(context)?.videosCount(section.videos.length) ?? '${section.videos.length} videos'} • ${_formatDuration(section.totalDuration.inSeconds)}',
+                  '${AppLocalizations.of(context)?.lesson(section.videos.length) ?? '${section.videos.length} lessons'} • ${_formatDuration(section.totalDuration.inSeconds)}',
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                     fontSize: 12,

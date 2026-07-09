@@ -5,6 +5,7 @@ import '../../core/services/thumbnail_cache_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/utils/localization_helper.dart';
 import '../../domain/entities/video.dart';
+import '../../domain/entities/lesson_type.dart';
 
 class BookmarkCard extends StatefulWidget {
   final Video video;
@@ -43,6 +44,7 @@ class _BookmarkCardState extends State<BookmarkCard> {
   }
 
   Future<void> _loadThumbnail() async {
+    // If thumbnailUrl is provided, we'll use CachedNetworkImage instead
     if (widget.video.thumbnailUrl != null && widget.video.thumbnailUrl!.isNotEmpty) {
       if (mounted) {
         setState(() {
@@ -53,7 +55,20 @@ class _BookmarkCardState extends State<BookmarkCard> {
       return;
     }
 
-    final cached = _thumbnailCache.getCached(widget.video.videoUrl);
+    // If no videoUrl (e.g., text/quiz/flashcard lessons), show placeholder
+    final videoUrl = widget.video.videoUrl;
+    if (videoUrl == null || videoUrl.isEmpty) {
+      if (mounted) {
+        setState(() {
+          _thumbnailLoading = false;
+          _thumbnailError = false;
+        });
+      }
+      return;
+    }
+
+    // Check cache first
+    final cached = _thumbnailCache.getCached(videoUrl);
     if (cached != null) {
       if (mounted) {
         setState(() {
@@ -65,7 +80,8 @@ class _BookmarkCardState extends State<BookmarkCard> {
       return;
     }
 
-    final thumbnail = await _thumbnailCache.getThumbnail(widget.video.videoUrl);
+    // Extract thumbnail using cache service
+    final thumbnail = await _thumbnailCache.getThumbnail(videoUrl);
 
     if (mounted) {
       setState(() {
@@ -140,7 +156,7 @@ class _BookmarkCardState extends State<BookmarkCard> {
                           ),
                         ),
 
-                        // Play button
+                        // Action button based on lesson type
                         if (!isLocked && !_thumbnailLoading && !_thumbnailError &&
                             (_thumbnailData != null || (video.thumbnailUrl != null && video.thumbnailUrl!.isNotEmpty)))
                           Center(
@@ -148,38 +164,37 @@ class _BookmarkCardState extends State<BookmarkCard> {
                               width: 40,
                               height: 40,
                               decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.7),
+                                color: _getLessonTypeColor(video.type).withValues(alpha: 0.85),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(
-                                Icons.play_arrow_rounded,
-                                size: 24,
+                              child: Icon(
+                                _getLessonTypeIcon(video.type),
+                                size: 22,
                                 color: Colors.white,
                               ),
                             ),
                           ),
 
-                        // Duration badge
-                        if (video.duration.inSeconds > 0)
-                          Positioned(
-                            bottom: 6,
-                            right: 6,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.85),
-                                borderRadius: BorderRadius.circular(AppColors.radiusXS),
-                              ),
-                              child: Text(
-                                _formatDuration(video.duration.inSeconds),
-                                style: theme.textTheme.labelSmall?.copyWith(
-                                  color: Colors.white,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                        // Duration/Info badge
+                        Positioned(
+                          bottom: 6,
+                          right: 6,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withValues(alpha: 0.85),
+                              borderRadius: BorderRadius.circular(AppColors.radiusXS),
+                            ),
+                            child: Text(
+                              _getLessonSubtitle(),
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                color: Colors.white,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
+                        ),
 
                         // PRO badge
                         if (video.isPremium)
@@ -281,10 +296,12 @@ class _BookmarkCardState extends State<BookmarkCard> {
 
   Widget _buildPlaceholder(ThemeData theme, bool isLocked, {bool isLoading = false}) {
     final isDark = theme.brightness == Brightness.dark;
+    final typeColor = _getLessonTypeColor(video.type);
+
     return Container(
       color: isDark
-          ? AppColors.surfaceDarkAlt
-          : AppColors.backgroundLightAlt,
+          ? typeColor.withValues(alpha: 0.15)
+          : typeColor.withValues(alpha: 0.1),
       child: Center(
         child: isLoading
             ? SizedBox(
@@ -292,15 +309,15 @@ class _BookmarkCardState extends State<BookmarkCard> {
                 height: 24,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  color: theme.colorScheme.primary.withValues(alpha: 0.6),
+                  color: typeColor.withValues(alpha: 0.6),
                 ),
               )
             : Icon(
-                Icons.play_circle_outline_rounded,
+                _getLessonTypeIcon(video.type),
                 size: 36,
                 color: isLocked
                     ? theme.colorScheme.onSurface.withValues(alpha: 0.3)
-                    : theme.colorScheme.primary.withValues(alpha: 0.5),
+                    : typeColor.withValues(alpha: 0.7),
               ),
       ),
     );
@@ -310,5 +327,55 @@ class _BookmarkCardState extends State<BookmarkCard> {
     final minutes = seconds ~/ 60;
     final remainingSeconds = seconds % 60;
     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+  }
+
+  /// Get icon for lesson type
+  IconData _getLessonTypeIcon(LessonType type) {
+    switch (type) {
+      case LessonType.video:
+        return Icons.play_arrow_rounded;
+      case LessonType.audio:
+        return Icons.headphones_rounded;
+      case LessonType.text:
+        return Icons.article_rounded;
+      case LessonType.quiz:
+        return Icons.quiz_rounded;
+      case LessonType.flashcard:
+        return Icons.style_rounded;
+    }
+  }
+
+  /// Get color for lesson type
+  Color _getLessonTypeColor(LessonType type) {
+    switch (type) {
+      case LessonType.video:
+        return Colors.blue;
+      case LessonType.audio:
+        return Colors.purple;
+      case LessonType.text:
+        return Colors.teal;
+      case LessonType.quiz:
+        return Colors.orange;
+      case LessonType.flashcard:
+        return Colors.pink;
+    }
+  }
+
+  /// Get subtitle text based on lesson type
+  String _getLessonSubtitle() {
+    switch (video.type) {
+      case LessonType.video:
+      case LessonType.audio:
+        return _formatDuration(video.duration.inSeconds);
+      case LessonType.text:
+        final minutes = (video.estimatedReadTime ?? video.duration.inSeconds) ~/ 60;
+        return '$minutes min read';
+      case LessonType.quiz:
+        final count = video.questions?.length ?? 0;
+        return '$count questions';
+      case LessonType.flashcard:
+        final count = video.cards?.length ?? 0;
+        return '$count cards';
+    }
   }
 }

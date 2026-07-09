@@ -18,6 +18,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get videos => '视频';
 
   @override
+  String get lessons => '课程';
+
+  @override
   String get practice => '练习';
 
   @override

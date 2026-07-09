@@ -126,6 +126,12 @@ abstract class AppLocalizations {
   /// **'Videos'**
   String get videos;
 
+  /// No description provided for @lessons.
+  ///
+  /// In en, this message translates to:
+  /// **'Lessons'**
+  String get lessons;
+
   /// No description provided for @practice.
   ///
   /// In en, this message translates to:

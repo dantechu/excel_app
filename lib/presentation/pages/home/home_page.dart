@@ -7,6 +7,7 @@ import '../../../core/utils/localization_helper.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../domain/entities/section.dart';
 import '../../../domain/entities/video.dart';
+import '../lessons/lesson_router.dart';
 import '../../bloc/bookmark/bookmark_bloc.dart';
 import '../../bloc/bookmark/bookmark_state.dart';
 import '../../bloc/video/video_bloc.dart';
@@ -480,7 +481,7 @@ class _HomePageState extends State<HomePage> {
                                   return VideoCard(
                                     video: video,
                                     isPremiumUser: isPremium,
-                                    onTap: () => _navigateToVideoPlayer(video, sections: sections),
+                                    onTap: () => _navigateToLesson(video, sections: sections),
                                     sections: sections,
                                   );
                                 },
@@ -589,7 +590,7 @@ class _HomePageState extends State<HomePage> {
                   child: BookmarkCard(
                     video: video,
                     isPremiumUser: isPremium,
-                    onTap: () => _navigateToVideoPlayer(video, sections: sections),
+                    onTap: () => _navigateToLesson(video, sections: sections),
                   ),
                 );
               },
@@ -600,7 +601,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _navigateToVideoPlayer(Video video, {List<Section>? sections}) {
+  void _navigateToLesson(Video lesson, {List<Section>? sections}) {
     // Get the currently selected course
     final coursesState = context.read<CoursesBloc>().state;
     String? selectedCourseId;
@@ -617,30 +618,40 @@ class _HomePageState extends State<HomePage> {
       courseSections ??= coursesState.course.sections;
     }
 
-    // Check if the video belongs to a different course
-    if (video.courseId != null &&
+    // Check if the lesson belongs to a different course
+    if (lesson.courseId != null &&
         selectedCourseId != null &&
-        video.courseId != selectedCourseId) {
-      // Video is from a different course - navigate to course details page
-      _navigateToCourseDetails(video.courseId!);
+        lesson.courseId != selectedCourseId) {
+      // Lesson is from a different course - navigate to course details page
+      _navigateToCourseDetails(lesson.courseId!);
       return;
     }
 
-    // Check if video is premium and user doesn't have premium access
+    // Check if lesson is premium and user doesn't have premium access
     // Use singleton service - SINGLE SOURCE OF TRUTH
     final hasPremiumAccess = PremiumService().isPremium;
 
-    if (video.isPremium && !hasPremiumAccess) {
+    if (lesson.isPremium && !hasPremiumAccess) {
       // Navigate to premium unlock screen
       Navigator.of(context).pushNamed('/premium');
     } else {
-      // Navigate to video player
-      Navigator.of(context).pushNamed(
-        '/video-player',
-        arguments: {
-          'video': video,
-          'sections': courseSections,
-        },
+      // Check if lesson can be played
+      if (!LessonRouter.canPlayLesson(lesson)) {
+        final reason = LessonRouter.getCannotPlayReason(lesson);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(reason ?? 'Cannot play this lesson'),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+
+      // Navigate to appropriate lesson page based on type
+      LessonRouter.navigateToLesson(
+        context,
+        lesson,
+        sections: courseSections,
       );
     }
   }

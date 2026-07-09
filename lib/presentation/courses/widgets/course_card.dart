@@ -180,7 +180,7 @@ class CourseCard extends StatelessWidget {
             context,
             icon: Icons.play_circle_outline_rounded,
             label: '${course.metadata.totalVideos}',
-            sublabel: AppLocalizations.of(context)?.videos ?? 'Videos',
+            sublabel: AppLocalizations.of(context)?.lessons ?? 'Lessons',
           ),
           Container(
             width: 1,

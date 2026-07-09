@@ -60,9 +60,19 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         return;
       }
 
+      // Check if video URL is available
+      final videoUrl = widget.video.videoUrl;
+      if (videoUrl == null || videoUrl.isEmpty) {
+        setState(() {
+          _error = 'No video URL available for this lesson';
+          _isLoading = false;
+        });
+        return;
+      }
+
       // Initialize video player controller
       _videoPlayerController = VideoPlayerController.networkUrl(
-        Uri.parse(widget.video.videoUrl),
+        Uri.parse(videoUrl),
       );
 
       await _videoPlayerController.initialize();

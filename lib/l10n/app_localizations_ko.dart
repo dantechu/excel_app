@@ -18,6 +18,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get videos => '비디오';
 
   @override
+  String get lessons => '레슨';
+
+  @override
   String get practice => '연습';
 
   @override
