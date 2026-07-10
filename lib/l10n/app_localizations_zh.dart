@@ -688,4 +688,134 @@ class AppLocalizationsZh extends AppLocalizations {
   String completedCount(int completed, int total) {
     return '$completed/$total 已完成';
   }
+
+  @override
+  String get noVideoUrlAvailable => '没有可用的视频链接';
+
+  @override
+  String get noAudioUrlAvailable => '没有可用的音频链接';
+
+  @override
+  String get noContentAvailable => '没有可用的内容';
+
+  @override
+  String get noQuestionsAvailable => '没有可用的问题';
+
+  @override
+  String get noFlashcardsAvailable => '没有可用的闪卡';
+
+  @override
+  String get lessonTypeArticle => '文章';
+
+  @override
+  String get minRead => '分钟阅读';
+
+  @override
+  String nQuestions(int count) {
+    return '$count 道题';
+  }
+
+  @override
+  String nCards(int count) {
+    return '$count 张卡片';
+  }
+
+  @override
+  String get markAsComplete => '标记为完成';
+
+  @override
+  String get completed => '已完成';
+
+  @override
+  String get lessonMarkedComplete => '课程已标记为完成！';
+
+  @override
+  String get noQuestionsForQuiz => '此测验没有可用的问题。';
+
+  @override
+  String questionXOfY(int current, int total) {
+    return '问题 $current / $total';
+  }
+
+  @override
+  String get previous => '上一题';
+
+  @override
+  String get next => '下一题';
+
+  @override
+  String get seeResults => '查看结果';
+
+  @override
+  String get congratulations => '恭喜！';
+
+  @override
+  String get keepPracticing => '继续练习！';
+
+  @override
+  String youScoredPercent(int score) {
+    return '您的得分是 $score%';
+  }
+
+  @override
+  String xOutOfYCorrect(int correct, int total) {
+    return '$total 题中答对 $correct 题';
+  }
+
+  @override
+  String passingScorePercent(int score) {
+    return '及格分数：$score%';
+  }
+
+  @override
+  String get tryAgain => '再试一次';
+
+  @override
+  String get backToLessons => '返回课程';
+
+  @override
+  String get noFlashcardsAvailableMessage => 'No flashcards available.';
+
+  @override
+  String cardXOfY(int current, int total) {
+    return 'Card $current of $total';
+  }
+
+  @override
+  String get tapToReveal => 'Tap to reveal';
+
+  @override
+  String get tapToFlipBack => 'Tap to flip back';
+
+  @override
+  String get front => 'FRONT';
+
+  @override
+  String get back => 'BACK';
+
+  @override
+  String get showAnswer => 'Show Answer';
+
+  @override
+  String get again => 'Again';
+
+  @override
+  String get hard => 'Hard';
+
+  @override
+  String get good => 'Good';
+
+  @override
+  String get easy => 'Easy';
+
+  @override
+  String get greatJob => 'Great Job!';
+
+  @override
+  String get studyAgain => 'Study Again';
+
+  @override
+  String xCorrectYWrong(int correct, int wrong) {
+    return '$correct correct, $wrong wrong';
+  }
 }
