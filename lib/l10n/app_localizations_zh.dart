@@ -774,48 +774,54 @@ class AppLocalizationsZh extends AppLocalizations {
   String get backToLessons => '返回课程';
 
   @override
-  String get noFlashcardsAvailableMessage => 'No flashcards available.';
+  String get noFlashcardsAvailableMessage => '没有可用的闪卡。';
 
   @override
   String cardXOfY(int current, int total) {
-    return 'Card $current of $total';
+    return '卡片 $current / $total';
   }
 
   @override
-  String get tapToReveal => 'Tap to reveal';
+  String get tapToReveal => '点击查看';
 
   @override
-  String get tapToFlipBack => 'Tap to flip back';
+  String get tapToFlipBack => '点击翻回';
 
   @override
-  String get front => 'FRONT';
+  String get front => '正面';
 
   @override
-  String get back => 'BACK';
+  String get back => '背面';
 
   @override
-  String get showAnswer => 'Show Answer';
+  String get showAnswer => '显示答案';
 
   @override
-  String get again => 'Again';
+  String get again => '再来';
 
   @override
-  String get hard => 'Hard';
+  String get hard => '困难';
 
   @override
-  String get good => 'Good';
+  String get good => '不错';
 
   @override
-  String get easy => 'Easy';
+  String get easy => '简单';
 
   @override
-  String get greatJob => 'Great Job!';
+  String get greatJob => '做得好！';
 
   @override
-  String get studyAgain => 'Study Again';
+  String get studyAgain => '再学一次';
 
   @override
   String xCorrectYWrong(int correct, int wrong) {
-    return '$correct correct, $wrong wrong';
+    return '$correct 个正确，$wrong 个错误';
   }
+
+  @override
+  String get lifetimeAccess => '终身会员';
+
+  @override
+  String get oneTimePayment => '一次性付款';
 }

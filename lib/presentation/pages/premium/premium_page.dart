@@ -258,7 +258,7 @@ class _PremiumPageState extends State<PremiumPage> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  'Lifetime Access',
+                  AppLocalizations.of(context)?.lifetimeAccess ?? 'Lifetime Access',
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontSize: 13,
                     color: theme.colorScheme.primary,
@@ -278,7 +278,7 @@ class _PremiumPageState extends State<PremiumPage> {
               ),
               const SizedBox(height: 4),
               Text(
-                'One-time payment',
+                AppLocalizations.of(context)?.oneTimePayment ?? 'One-time payment',
                 style: theme.textTheme.bodySmall?.copyWith(
                   fontSize: 13,
                   color: theme.colorScheme.onSurfaceVariant,

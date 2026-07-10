@@ -314,5 +314,33 @@
   "xOutOfYCorrect": "{total} 题中答对 {correct} 题",
   "passingScorePercent": "及格分数：{score}%",
   "tryAgain": "再试一次",
-  "backToLessons": "返回课程"
+  "backToLessons": "返回课程",
+  "noFlashcardsAvailableMessage": "没有可用的闪卡。",
+  "cardXOfY": "卡片 {current} / {total}",
+  "@cardXOfY": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "tapToReveal": "点击查看",
+  "tapToFlipBack": "点击翻回",
+  "front": "正面",
+  "back": "背面",
+  "showAnswer": "显示答案",
+  "again": "再来",
+  "hard": "困难",
+  "good": "不错",
+  "easy": "简单",
+  "greatJob": "做得好！",
+  "studyAgain": "再学一次",
+  "xCorrectYWrong": "{correct} 个正确，{wrong} 个错误",
+  "@xCorrectYWrong": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "wrong": {"type": "int"}
+    }
+  },
+  "lifetimeAccess": "终身会员",
+  "oneTimePayment": "一次性付款"
 }
