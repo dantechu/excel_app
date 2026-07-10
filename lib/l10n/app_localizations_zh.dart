@@ -30,6 +30,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get premium => '高级版';
 
   @override
+  String get statisticsTab => 'Statistics';
+
+  @override
+  String get courses => '课程';
+
+  @override
   String get allLessons => '所有课程';
 
   @override
@@ -555,9 +561,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get exhaleSlowly => '缓慢完全地呼气';
-
-  @override
-  String get courses => '课程';
 
   @override
   String get refreshCourses => '刷新课程';

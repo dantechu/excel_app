@@ -7,10 +7,13 @@ import '../../../l10n/app_localizations.dart';
 import '../../bloc/video/video_bloc.dart';
 import '../../bloc/video/video_event.dart';
 import '../../bloc/premium/premium_bloc.dart';
+import '../../bloc/statistics/statistics_bloc.dart';
+import '../../bloc/statistics/statistics_event.dart';
 import '../../courses/bloc/courses_bloc.dart';
 import '../../courses/bloc/courses_event.dart';
 import '../home/home_page.dart';
 import '../../courses/pages/courses_page.dart';
+import '../statistics/statistics_page.dart';
 import '../settings/settings_page.dart';
 
 class MainNavigationPage extends StatefulWidget {
@@ -38,6 +41,12 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
         page: const CoursesPage(),
       ),
       NavigationItem(
+        icon: Icons.analytics_outlined,
+        selectedIcon: Icons.analytics_rounded,
+        label: AppLocalizations.of(context)?.statisticsTab ?? 'Statistics',
+        page: const StatisticsPage(),
+      ),
+      NavigationItem(
         icon: Icons.settings_outlined,
         selectedIcon: Icons.settings_rounded,
         label: AppLocalizations.of(context)?.settings ?? 'Settings',
@@ -56,6 +65,9 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
     } else if (index == 1) {
       // Courses tab: ensure courses list is loaded
       blocContext.read<CoursesBloc>().add(const LoadCourses());
+    } else if (index == 2) {
+      // Statistics tab: refresh statistics
+      blocContext.read<StatisticsBloc>().add(const RefreshStatistics());
     }
     setState(() {
       _currentIndex = index;
@@ -65,7 +77,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
   @override
   Widget build(BuildContext context) {
     final navigationItems = _getNavigationItems(context);
-    
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<VideoBloc>(
@@ -76,6 +88,9 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
         ),
         BlocProvider<CoursesBloc>(
           create: (context) => di.sl<CoursesBloc>(),
+        ),
+        BlocProvider<StatisticsBloc>(
+          create: (context) => di.sl<StatisticsBloc>(),
         ),
       ],
       child: Builder(

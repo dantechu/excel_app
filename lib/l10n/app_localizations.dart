@@ -150,6 +150,18 @@ abstract class AppLocalizations {
   /// **'Premium'**
   String get premium;
 
+  /// No description provided for @statisticsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics'**
+  String get statisticsTab;
+
+  /// No description provided for @courses.
+  ///
+  /// In en, this message translates to:
+  /// **'Courses'**
+  String get courses;
+
   /// No description provided for @allLessons.
   ///
   /// In en, this message translates to:
@@ -1151,12 +1163,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exhale slowly and completely'**
   String get exhaleSlowly;
-
-  /// No description provided for @courses.
-  ///
-  /// In en, this message translates to:
-  /// **'Courses'**
-  String get courses;
 
   /// No description provided for @refreshCourses.
   ///
