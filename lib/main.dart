@@ -8,6 +8,8 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'core/theme/app_theme.dart';
 import 'core/services/interstitial_ad_service.dart';
+import 'core/services/rewarded_ad_service.dart';
+import 'core/services/ad_unlock_service.dart';
 import 'injection_container.dart' as di;
 import 'presentation/bloc/locale/locale_bloc.dart';
 import 'presentation/bloc/locale/locale_event.dart';
@@ -52,6 +54,12 @@ void main() async {
 
   // Initialize Interstitial Ad Service (preloads first ad)
   InterstitialAdService().initialize();
+
+  // Initialize Rewarded Ad Service (preloads first ad)
+  RewardedAdService().initialize();
+
+  // Initialize Ad Unlock Service (loads unlocked lessons from storage)
+  await AdUnlockService().initialize();
 
   // Initialize dependency injection
   await di.init();
