@@ -173,6 +173,7 @@ Future<void> init() async {
       remoteDataSource: sl(),
       localDataSource: sl(),
       networkInfo: sl(),
+      courseRepository: sl(),
     ),
   );
 
@@ -217,7 +218,6 @@ Future<void> init() async {
 
   sl.registerLazySingleton<DownloadLocalDataSource>(
     () => DownloadLocalDataSourceImpl(
-      dio: sl(),
       downloadBox: Hive.box('downloads_box'),
     ),
   );

@@ -21,15 +21,33 @@ abstract class DownloadLocalDataSource {
 }
 
 class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
-  final Dio dio;
   final Box downloadBox;
   final Map<String, CancelToken> _cancelTokens = {};
   final Map<String, int> _downloadProgress = {};
 
+  /// Dedicated Dio instance for file downloads (no JSON headers)
+  late final Dio _downloadDio;
+
   DownloadLocalDataSourceImpl({
-    required this.dio,
     required this.downloadBox,
-  });
+  }) {
+    // Create a dedicated Dio instance for file downloads
+    // This avoids the JSON headers from the API Dio client
+    _downloadDio = Dio(BaseOptions(
+      connectTimeout: const Duration(seconds: 30),
+      sendTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(minutes: 30),
+    ));
+
+    // Add logging interceptor for debugging
+    _downloadDio.interceptors.add(LogInterceptor(
+      requestBody: false,
+      responseBody: false,
+      requestHeader: true,
+      responseHeader: false,
+      error: true,
+    ));
+  }
 
   @override
   Future<DownloadItemModel> startDownload(String videoId, String url, {String? title, String? mediaType}) async {
@@ -89,14 +107,10 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
       final cancelToken = CancelToken();
       _cancelTokens[downloadId] = cancelToken;
 
-      dio.download(
+      _downloadDio.download(
         url,
         localPath,
         cancelToken: cancelToken,
-        options: Options(
-          receiveTimeout: const Duration(minutes: 30), // 30 min timeout for large files
-          validateStatus: (status) => status! < 500, // Accept all status codes < 500
-        ),
         onReceiveProgress: (received, total) async {
           if (total != -1) {
             // Check if download size is reasonable (max 500MB per video)
