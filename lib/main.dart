@@ -7,6 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'core/theme/app_theme.dart';
+import 'core/services/interstitial_ad_service.dart';
 import 'injection_container.dart' as di;
 import 'presentation/bloc/locale/locale_bloc.dart';
 import 'presentation/bloc/locale/locale_event.dart';
@@ -21,6 +22,8 @@ import 'presentation/bloc/lesson_completion/lesson_completion_bloc.dart';
 import 'presentation/bloc/lesson_completion/lesson_completion_event.dart';
 import 'presentation/bloc/premium/premium_bloc.dart';
 import 'presentation/bloc/premium/premium_event.dart';
+import 'presentation/courses/bloc/courses_bloc.dart';
+import 'presentation/courses/bloc/courses_event.dart';
 import 'presentation/pages/splash/splash_page.dart';
 import 'presentation/pages/onboarding/onboarding_page.dart';
 import 'presentation/pages/navigation/main_navigation_page.dart';
@@ -46,6 +49,9 @@ void main() async {
 
   // Initialize Google Mobile Ads
   await MobileAds.instance.initialize();
+
+  // Initialize Interstitial Ad Service (preloads first ad)
+  InterstitialAdService().initialize();
 
   // Initialize dependency injection
   await di.init();
@@ -115,6 +121,9 @@ class _ExcelTrainingAppState extends State<ExcelTrainingApp> with WidgetsBinding
         ),
         BlocProvider<LessonCompletionBloc>(
           create: (context) => di.sl<LessonCompletionBloc>()..add(const LoadCompletions()),
+        ),
+        BlocProvider<CoursesBloc>(
+          create: (context) => di.sl<CoursesBloc>()..add(const LoadCourses()),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
