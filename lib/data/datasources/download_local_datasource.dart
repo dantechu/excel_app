@@ -6,7 +6,7 @@ import '../../core/error/exceptions.dart';
 import '../models/download_item_model.dart';
 
 abstract class DownloadLocalDataSource {
-  Future<DownloadItemModel> startDownload(String videoId, String url);
+  Future<DownloadItemModel> startDownload(String videoId, String url, {String? title, String? mediaType});
   Future<bool> pauseDownload(String downloadId);
   Future<bool> resumeDownload(String downloadId);
   Future<bool> cancelDownload(String downloadId);
@@ -32,7 +32,7 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
   });
 
   @override
-  Future<DownloadItemModel> startDownload(String videoId, String url) async {
+  Future<DownloadItemModel> startDownload(String videoId, String url, {String? title, String? mediaType}) async {
     try {
       // Check if already downloaded
       final existing = await getDownloadByVideoId(videoId);
@@ -54,15 +54,18 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
         await downloadsDir.create(recursive: true);
       }
 
-      // Create local file path
-      final fileName = '${videoId}_${DateTime.now().millisecondsSinceEpoch}.mp4';
+      // Determine file extension based on media type
+      final fileExtension = mediaType == 'audio' ? '.mp3' : '.mp4';
+
+      // Create local file path with correct extension
+      final fileName = '${videoId}_${DateTime.now().millisecondsSinceEpoch}$fileExtension';
       final localPath = '${downloadsDir.path}/$fileName';
 
       // Create the file first to set exclusion from backup
       final file = File(localPath);
       await file.create(recursive: true);
 
-      // Create download item
+      // Create download item with title and mediaType
       final downloadId = DateTime.now().millisecondsSinceEpoch.toString();
       final downloadItem = DownloadItemModel(
         id: downloadId,
@@ -75,6 +78,8 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
         downloadedBytes: 0,
         startedAt: DateTime.now(),
         updatedAt: DateTime.now(),
+        title: title,
+        mediaType: mediaType,
       );
 
       // Save to Hive
@@ -118,7 +123,10 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
         // Download completed - Mark file to exclude from iCloud backup
         // This is required by Apple for downloaded content
         final downloadedFile = File(localPath);
+        int actualFileSize = 0;
         if (await downloadedFile.exists()) {
+          // Get the actual file size from disk
+          actualFileSize = await downloadedFile.length();
           // On iOS, we need to set the file attribute to exclude from backup
           // This is done through platform channel or the file is in the right directory
           // Since we're using Application Support, it's already excluded
@@ -127,6 +135,8 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
         final completed = downloadItem.copyWith(
           status: 'completed',
           progress: 1.0,
+          totalBytes: actualFileSize > 0 ? actualFileSize : downloadItem.totalBytes,
+          downloadedBytes: actualFileSize > 0 ? actualFileSize : downloadItem.downloadedBytes,
           completedAt: DateTime.now(),
           updatedAt: DateTime.now(),
         );
@@ -165,9 +175,11 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
         _cancelTokens.remove(downloadId);
 
         // Update status
-        final downloadData = await downloadBox.get(downloadId);
+        final downloadData = downloadBox.get(downloadId);
         if (downloadData != null) {
-          final download = DownloadItemModel.fromJson(downloadData);
+          // Cast Map<dynamic, dynamic> from Hive to Map<String, dynamic>
+          final Map<String, dynamic> jsonData = Map<String, dynamic>.from(downloadData as Map);
+          final download = DownloadItemModel.fromJson(jsonData);
           final paused = download.copyWith(
             status: 'paused',
             updatedAt: DateTime.now(),
@@ -184,10 +196,12 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
   @override
   Future<bool> resumeDownload(String downloadId) async {
     try {
-      final downloadData = await downloadBox.get(downloadId);
+      final downloadData = downloadBox.get(downloadId);
       if (downloadData == null) return false;
 
-      final download = DownloadItemModel.fromJson(downloadData);
+      // Cast Map<dynamic, dynamic> from Hive to Map<String, dynamic>
+      final Map<String, dynamic> jsonData = Map<String, dynamic>.from(downloadData as Map);
+      final download = DownloadItemModel.fromJson(jsonData);
 
       // Restart download
       await startDownload(download.videoId, download.url);
@@ -207,9 +221,11 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
       }
 
       // Update status
-      final downloadData = await downloadBox.get(downloadId);
+      final downloadData = downloadBox.get(downloadId);
       if (downloadData != null) {
-        final download = DownloadItemModel.fromJson(downloadData);
+        // Cast Map<dynamic, dynamic> from Hive to Map<String, dynamic>
+        final Map<String, dynamic> jsonData = Map<String, dynamic>.from(downloadData as Map);
+        final download = DownloadItemModel.fromJson(jsonData);
         final cancelled = download.copyWith(
           status: 'cancelled',
           updatedAt: DateTime.now(),
@@ -233,10 +249,12 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
   @override
   Future<bool> deleteDownload(String downloadId) async {
     try {
-      final downloadData = await downloadBox.get(downloadId);
+      final downloadData = downloadBox.get(downloadId);
       if (downloadData == null) return false;
 
-      final download = DownloadItemModel.fromJson(downloadData);
+      // Cast Map<dynamic, dynamic> from Hive to Map<String, dynamic>
+      final Map<String, dynamic> jsonData = Map<String, dynamic>.from(downloadData as Map);
+      final download = DownloadItemModel.fromJson(jsonData);
 
       // Delete file
       final file = File(download.localPath);
@@ -260,9 +278,11 @@ class DownloadLocalDataSourceImpl implements DownloadLocalDataSource {
     try {
       final downloads = <DownloadItemModel>[];
       for (var key in downloadBox.keys) {
-        final data = await downloadBox.get(key);
+        final data = downloadBox.get(key);
         if (data != null) {
-          downloads.add(DownloadItemModel.fromJson(data));
+          // Cast Map<dynamic, dynamic> from Hive to Map<String, dynamic>
+          final Map<String, dynamic> jsonData = Map<String, dynamic>.from(data as Map);
+          downloads.add(DownloadItemModel.fromJson(jsonData));
         }
       }
       return downloads;

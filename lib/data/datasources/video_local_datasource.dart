@@ -43,13 +43,17 @@ class VideoLocalDataSourceImpl implements VideoLocalDataSource {
     try {
       final box = await Hive.openBox<Map>(lessonBoxName);
       final lessons = <LessonModel>[];
-      
+
       for (final lessonMap in box.values) {
         if (lessonMap is Map<String, dynamic>) {
           lessons.add(LessonModel.fromJson(lessonMap));
+        } else if (lessonMap is Map) {
+          // Cast Map<dynamic, dynamic> from Hive to Map<String, dynamic>
+          final Map<String, dynamic> jsonData = Map<String, dynamic>.from(lessonMap);
+          lessons.add(LessonModel.fromJson(jsonData));
         }
       }
-      
+
       return lessons;
     } catch (e) {
       throw CacheException('Failed to get cached lessons: $e');
@@ -81,11 +85,17 @@ class VideoLocalDataSourceImpl implements VideoLocalDataSource {
     try {
       final box = await Hive.openBox<Map>(lessonBoxName);
       final lessonMap = box.get(id);
-      
-      if (lessonMap != null && lessonMap is Map<String, dynamic>) {
-        return LessonModel.fromJson(lessonMap);
+
+      if (lessonMap != null) {
+        if (lessonMap is Map<String, dynamic>) {
+          return LessonModel.fromJson(lessonMap);
+        } else if (lessonMap is Map) {
+          // Cast Map<dynamic, dynamic> from Hive to Map<String, dynamic>
+          final Map<String, dynamic> jsonData = Map<String, dynamic>.from(lessonMap);
+          return LessonModel.fromJson(jsonData);
+        }
       }
-      
+
       return null;
     } catch (e) {
       throw CacheException('Failed to get cached lesson: $e');

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
-import 'package:excel_app/core/services/premium_service.dart';
 import 'package:flutter/material.dart';
+import '../../../core/services/premium_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,6 +16,7 @@ import '../../bloc/locale/locale_event.dart';
 import '../../bloc/locale/locale_state.dart';
 import '../../bloc/premium/premium_bloc.dart';
 import '../../bloc/premium/premium_state.dart';
+import '../downloads/downloads_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -465,10 +466,26 @@ class SettingsPage extends StatelessWidget {
   }
 
   Widget _buildAboutSection(BuildContext context) {
+    final isPremium = PremiumService().isPremium;
+
     return _buildGlassmorphicCard(
       context,
       child: Column(
         children: [
+          // Downloads (Premium only)
+          if (isPremium) ...[
+            _buildSettingsTile(
+              context,
+              icon: Icons.download_rounded,
+              iconColor: Colors.teal,
+              title: 'Downloads',
+              subtitle: 'Manage offline content',
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const DownloadsPage()),
+              ),
+            ),
+            _buildDivider(context),
+          ],
           _buildSettingsTile(
             context,
             icon: Icons.apps_rounded,

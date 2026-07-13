@@ -132,6 +132,15 @@ Future<void> init() async {
   // Use cases
   sl.registerLazySingleton(() => DownloadVideo(sl()));
   sl.registerLazySingleton(() => IsVideoDownloaded(sl()));
+  sl.registerLazySingleton(() => GetLocalVideoPath(sl()));
+  sl.registerLazySingleton(() => GetAllDownloads(sl()));
+  sl.registerLazySingleton(() => GetCompletedDownloads(sl()));
+  sl.registerLazySingleton(() => GetActiveDownloads(sl()));
+  sl.registerLazySingleton(() => GetDownloadByVideoId(sl()));
+  sl.registerLazySingleton(() => PauseDownload(sl()));
+  sl.registerLazySingleton(() => ResumeDownload(sl()));
+  sl.registerLazySingleton(() => CancelDownload(sl()));
+  sl.registerLazySingleton(() => DeleteDownload(sl()));
 
   //! Features - Bookmark
   // Bloc
