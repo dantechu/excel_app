@@ -69,6 +69,9 @@ dependencies:
   share_plus: ^7.2.1
   permission_handler: ^11.0.1
 
+  # Certificate/Gallery saving
+  saver_gallery: ^3.0.6
+
   # Functional Programming
   dartz: ^0.10.1
 

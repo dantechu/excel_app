@@ -17,6 +17,7 @@ import '../../bloc/locale/locale_state.dart';
 import '../../bloc/premium/premium_bloc.dart';
 import '../../bloc/premium/premium_state.dart';
 import '../downloads/downloads_page.dart';
+import '../certificate/certificates_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -461,6 +462,17 @@ class SettingsPage extends StatelessWidget {
             ),
             _buildDivider(context),
           ],
+          _buildSettingsTile(
+            context,
+            icon: Icons.workspace_premium_rounded,
+            iconColor: Colors.amber,
+            title: AppLocalizations.of(context)?.certificates ?? 'Certificates',
+            subtitle: AppLocalizations.of(context)?.viewYourCertificates ?? 'View your certificates',
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const CertificatesPage()),
+            ),
+          ),
+          _buildDivider(context),
           _buildSettingsTile(
             context,
             icon: Icons.apps_rounded,

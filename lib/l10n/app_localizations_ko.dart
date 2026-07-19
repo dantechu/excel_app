@@ -965,4 +965,70 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get continueText => '계속';
+
+  @override
+  String get getCertificate => '인증서 받기';
+
+  @override
+  String get certificate => '인증서';
+
+  @override
+  String get certificates => '인증서';
+
+  @override
+  String get enterYourName => '이름을 입력하세요';
+
+  @override
+  String get nameWillAppearOnCertificate => '이 이름이 인증서에 표시됩니다';
+
+  @override
+  String get nameCannotBeChanged => '이름을 정확하게 입력하세요. 잘못된 이름은 나중에 변경할 수 없습니다.';
+
+  @override
+  String get fullName => '전체 이름';
+
+  @override
+  String get enterFullName => '전체 이름을 입력하세요';
+
+  @override
+  String get pleaseEnterName => '이름을 입력해 주세요';
+
+  @override
+  String get nameTooShort => '이름이 너무 짧습니다';
+
+  @override
+  String get generateCertificate => '인증서 생성';
+
+  @override
+  String get downloadCertificate => '인증서 다운로드';
+
+  @override
+  String get certificateSaved => '인증서가 갤러리에 저장되었습니다!';
+
+  @override
+  String get errorSavingCertificate => '인증서 저장 오류';
+
+  @override
+  String get errorGeneratingCertificate => '인증서 생성 오류';
+
+  @override
+  String get storagePermissionRequired => '인증서를 저장하려면 저장소 권한이 필요합니다';
+
+  @override
+  String get certificateNotAvailable => '인증서를 사용할 수 없습니다';
+
+  @override
+  String get certificateAvailable => '인증서 사용 가능!';
+
+  @override
+  String get saving => '저장 중...';
+
+  @override
+  String get noCertificatesYet => '아직 인증서가 없습니다';
+
+  @override
+  String get completeCourseForCertificate => '인증서가 있는 코스를 완료하면 여기에 표시됩니다';
+
+  @override
+  String get viewYourCertificates => '인증서 보기';
 }

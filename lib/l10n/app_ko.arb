@@ -387,5 +387,28 @@
 
   "sectionCompleted": "섹션 완료!",
   "sectionCompletedMessage": "잘하셨어요! 이 섹션의 모든 레슨을 완료했습니다.",
-  "continueText": "계속"
+  "continueText": "계속",
+
+  "getCertificate": "인증서 받기",
+  "certificate": "인증서",
+  "certificates": "인증서",
+  "enterYourName": "이름을 입력하세요",
+  "nameWillAppearOnCertificate": "이 이름이 인증서에 표시됩니다",
+  "nameCannotBeChanged": "이름을 정확하게 입력하세요. 잘못된 이름은 나중에 변경할 수 없습니다.",
+  "fullName": "전체 이름",
+  "enterFullName": "전체 이름을 입력하세요",
+  "pleaseEnterName": "이름을 입력해 주세요",
+  "nameTooShort": "이름이 너무 짧습니다",
+  "generateCertificate": "인증서 생성",
+  "downloadCertificate": "인증서 다운로드",
+  "certificateSaved": "인증서가 갤러리에 저장되었습니다!",
+  "errorSavingCertificate": "인증서 저장 오류",
+  "errorGeneratingCertificate": "인증서 생성 오류",
+  "storagePermissionRequired": "인증서를 저장하려면 저장소 권한이 필요합니다",
+  "certificateNotAvailable": "인증서를 사용할 수 없습니다",
+  "certificateAvailable": "인증서 사용 가능!",
+  "saving": "저장 중...",
+  "noCertificatesYet": "아직 인증서가 없습니다",
+  "completeCourseForCertificate": "인증서가 있는 코스를 완료하면 여기에 표시됩니다",
+  "viewYourCertificates": "인증서 보기"
 }
