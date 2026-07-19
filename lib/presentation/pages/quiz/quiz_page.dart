@@ -47,6 +47,8 @@ class _QuizPageState extends State<QuizPage> {
   int? _selectedOptionIndex;
   bool _quizCompleted = false;
   final List<int?> _userAnswers = [];
+  bool _isLastLesson = false;
+  bool _autoShowTriggered = false;
 
   List<QuizQuestion> get questions => widget.lesson.questions ?? [];
   QuizQuestion? get currentQuestion =>
@@ -60,6 +62,35 @@ class _QuizPageState extends State<QuizPage> {
   void initState() {
     super.initState();
     _userAnswers.addAll(List.filled(questions.length, null));
+    _checkIfLastLesson();
+  }
+
+  void _checkIfLastLesson() {
+    // Get the current course
+    Course? currentCourse;
+    try {
+      final coursesState = context.read<CoursesBloc>().state;
+      if (coursesState is CoursesLoaded) {
+        currentCourse = coursesState.selectedCourse;
+        if (currentCourse == null && widget.lesson.courseId != null) {
+          currentCourse = coursesState.courses.where(
+            (c) => c.id == widget.lesson.courseId,
+          ).firstOrNull;
+        }
+      } else if (coursesState is SelectedCourseLoaded) {
+        currentCourse = coursesState.course;
+      } else if (coursesState is CourseSelected) {
+        currentCourse = coursesState.course;
+      }
+    } catch (_) {}
+
+    if (currentCourse != null) {
+      final nextLessonResult = NextLessonService.findNextLesson(
+        currentLesson: widget.lesson,
+        course: currentCourse,
+      );
+      _isLastLesson = !nextLessonResult.hasNextLesson;
+    }
   }
 
   void _selectOption(int index) {
@@ -99,6 +130,91 @@ class _QuizPageState extends State<QuizPage> {
           durationSeconds: widget.lesson.duration.inSeconds,
         ),
       );
+
+      // If this is the last lesson, start countdown to auto-show completion dialog
+      if (_isLastLesson) {
+        _startAutoShowCountdown();
+      }
+    }
+  }
+
+  void _startAutoShowCountdown() {
+    // Wait 3 seconds in the background, then show completion dialog
+    Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted || _autoShowTriggered) return;
+      _autoShowTriggered = true;
+      _showCompletionDialogs();
+    });
+  }
+
+  void _showCompletionDialogs() async {
+    if (!mounted) return;
+
+    // Get the completion state
+    final completionState = context.read<LessonCompletionBloc>().state;
+
+    // Get the current course
+    Course? currentCourse;
+    try {
+      final coursesState = context.read<CoursesBloc>().state;
+      if (coursesState is CoursesLoaded) {
+        currentCourse = coursesState.selectedCourse;
+        if (currentCourse == null && widget.lesson.courseId != null) {
+          currentCourse = coursesState.courses.where(
+            (c) => c.id == widget.lesson.courseId,
+          ).firstOrNull;
+        }
+      } else if (coursesState is SelectedCourseLoaded) {
+        currentCourse = coursesState.course;
+      } else if (coursesState is CourseSelected) {
+        currentCourse = coursesState.course;
+      }
+    } catch (_) {}
+
+    if (currentCourse == null || !mounted) return;
+
+    final allSections = widget.sections ?? currentCourse.sections;
+
+    // Check for course completion first
+    if (completionState is LessonCompletionLoaded) {
+      final isCourseComplete = CourseCompletionDialog.isCourseCompleted(
+        course: currentCourse,
+        completionState: completionState,
+        currentLessonId: widget.lesson.id,
+      );
+
+      if (isCourseComplete && mounted) {
+        await CertificateService().markCourseCompleted(currentCourse.id);
+        if (mounted) {
+          await CourseCompletionDialog.show(
+            context: context,
+            course: currentCourse,
+          );
+        }
+        return;
+      }
+    }
+
+    // Check for section completion
+    if (completionState is LessonCompletionLoaded && allSections != null && mounted) {
+      for (final section in allSections) {
+        final lessonInSection = section.lessons.any((l) => l.id == widget.lesson.id);
+        if (lessonInSection) {
+          final isSectionComplete = SectionCompletionDialog.isSectionCompleted(
+            section: section,
+            currentLesson: widget.lesson,
+            completionState: completionState,
+          );
+
+          if (isSectionComplete && mounted) {
+            await SectionCompletionDialog.show(
+              context: context,
+              completedSection: section,
+            );
+          }
+          break;
+        }
+      }
     }
   }
 
@@ -432,52 +548,75 @@ class _QuizPageState extends State<QuizPage> {
             ),
             const SizedBox(height: 48),
 
-            // Action buttons - show Next Lesson as primary if passed
+            // Action buttons - hide Next Lesson if last lesson (completion dialog shows automatically)
             if (passed) ...[
-              // Next Lesson button (primary)
-              SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: ElevatedButton.icon(
-                  onPressed: () => _onNextLessonPressed(context),
-                  icon: const Icon(Icons.arrow_forward_rounded),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+              if (_isLastLesson) ...[
+                // Only show Try Again button for last lesson (completion dialog shows automatically after 3s)
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: OutlinedButton(
+                    onPressed: _restartQuiz,
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
-                  ),
-                  label: Text(
-                    l10n?.nextLesson ?? 'Next Lesson',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              // Try Again button (secondary)
-              SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: OutlinedButton(
-                  onPressed: _restartQuiz,
-                  style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: Text(
-                    l10n?.tryAgain ?? 'Try Again',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                    child: Text(
+                      l10n?.tryAgain ?? 'Try Again',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ] else ...[
+                // Next Lesson button (primary) - only show if NOT last lesson
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: ElevatedButton.icon(
+                    onPressed: () => _onNextLessonPressed(context),
+                    icon: const Icon(Icons.arrow_forward_rounded),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    label: Text(
+                      l10n?.nextLesson ?? 'Next Lesson',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Try Again button (secondary)
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: OutlinedButton(
+                    onPressed: _restartQuiz,
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: Text(
+                      l10n?.tryAgain ?? 'Try Again',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ] else ...[
               // Try Again button (primary) when failed
               SizedBox(
