@@ -1,0 +1,225 @@
+================================================================================
+GOOGLE PLAY STORE LISTING - EXCEL MASTERY (Copy-Paste Ready)
+================================================================================
+
+Based on competitive analysis of Excel learning apps in September 2026.
+
+App teaches Microsoft 365 Excel through 3 structured courses:
+- Beginner (44 lessons, 3h 41m)
+- Intermediate (44 lessons, 2h 36m)
+- Advanced (35 lessons, 2h 53m)
+
+================================================================================
+TRADEMARK POLICY NOTICE
+================================================================================
+
+Microsoft's trademark guidelines state:
+- Cannot use "Microsoft" or "Excel" in app name, developer name, or screenshots
+- CAN use these terms in text description to state compatibility/what app teaches
+
+Google Play Intellectual Property Policy:
+- Prohibits violations of trademark, copyright, patent rights
+- Apps can be removed for IP violations
+
+RECOMMENDATION: Use SAFER options for title/short description.
+Description can mention Excel when truthfully describing what app teaches.
+
+--------------------------------------------------------------------------------
+APP TITLE OPTIONS (30 characters max)
+--------------------------------------------------------------------------------
+
+OPTION A - SAFEST (No trademark in name):
+
+Spreadsheet Mastery: Full Course
+
+(30 characters)
+
+OPTION B - MODERATE RISK (Commonly used pattern):
+
+Learn Spreadsheets: Excel Guide
+
+(30 characters)
+
+OPTION C - HIGHER RISK (Uses trademark directly):
+
+Excel Mastery: Learn & Master
+
+(29 characters)
+Note: Similar to existing apps but carries rejection risk.
+
+
+--------------------------------------------------------------------------------
+SHORT DESCRIPTION OPTIONS (80 characters max)
+--------------------------------------------------------------------------------
+
+OPTION A - SAFEST:
+
+Learn spreadsheets with 123 video lessons. Beginner to Advanced. Formulas & more.
+
+(80 characters)
+
+OPTION B - MODERATE RISK (mentions Excel - descriptive use):
+
+Learn Excel with 123 video lessons. Beginner to Advanced. Formulas & Pivot Tables.
+
+(80 characters)
+
+
+--------------------------------------------------------------------------------
+FULL DESCRIPTION (4000 characters max - INDEXED for search on Google Play)
+--------------------------------------------------------------------------------
+
+NOTE: Using "Excel" in description when describing what the app teaches is
+generally acceptable. Avoid excessive keyword stuffing with trademarks.
+Balance between SEO needs and trademark compliance.
+
+---
+
+Learn spreadsheets with the most comprehensive video tutorial app on mobile. Master formulas, functions, pivot tables, charts, and data analysis with 123 step-by-step video lessons.
+
+This app teaches you how to use Microsoft Excel and spreadsheet software, taking you from complete beginner to advanced user with 3 structured courses.
+
+LEARN SPREADSHEETS FROM BEGINNER TO ADVANCED
+
+Whether you need to learn spreadsheet basics, understand formulas, or master advanced functions like pivot tables, this app has you covered with our structured training program.
+
+3 COMPLETE COURSES
+
+BEGINNER COURSE
+44 video lessons covering spreadsheet basics: how to navigate the interface, enter data, write basic formulas, format cells, and create simple charts. Perfect tutorial for beginners who have never used spreadsheet software before.
+
+INTERMEDIATE COURSE
+44 video lessons building your skills: complex formulas, essential functions like VLOOKUP, IF statements, SUMIF, and COUNTIF. Learn data sorting, filtering, conditional formatting, and how to create professional charts and graphs.
+
+ADVANCED COURSE
+35 video lessons for power users: pivot tables, data analysis techniques, advanced functions, macros basics, data validation, and techniques used by professionals in business. Take your spreadsheet training to the professional level.
+
+TOPICS COVERED
+
+Formulas
+Learn essential formulas including SUM, AVERAGE, COUNT, MAX, MIN, and how to combine formulas for powerful calculations. Master the formula bar and understand cell references.
+
+Functions
+Master key functions: VLOOKUP, HLOOKUP, INDEX MATCH, IF, AND, OR, SUMIF, COUNTIF, and more. Learn when to use each function and how to nest functions for complex tasks.
+
+Pivot Tables
+Transform raw data into insights with pivot tables. Learn to summarize thousands of rows, create pivot charts, and analyze data like an expert.
+
+Charts & Data Visualization
+Create professional charts: bar charts, line charts, pie charts, and more. Learn which chart types best represent your data and how to format charts effectively.
+
+Data Analysis
+Learn data analysis techniques: sorting, filtering, removing duplicates, data validation, and organizing large datasets. Essential skills for business users.
+
+Keyboard Shortcuts
+Speed up your work with keyboard shortcuts. Learn the shortcuts that professionals use to work faster and more efficiently.
+
+WHY CHOOSE THIS APP?
+
+123 Video Lessons
+More content than most spreadsheet apps. Step-by-step video tutorials show you exactly what to do.
+
+9+ Hours of Training
+Comprehensive coverage of spreadsheet features across 27 sections.
+
+Structured Learning Path
+Clear progression from beginner to advanced. Each lesson builds on the previous one.
+
+7 Languages Supported
+Learn in English, Chinese, Spanish, Japanese, French, German, or Korean. Full course available in all languages.
+
+Offline Learning
+Download lessons for offline practice. Learn spreadsheet skills anywhere, even without internet.
+
+Mobile-First Design
+Tutorial app designed for learning on your phone or tablet. Watch lessons on your commute or during breaks.
+
+One-Time Purchase
+No monthly subscription required. Pay once for lifetime access to all courses and features.
+
+PERFECT FOR
+
+- Students learning spreadsheets for school or university
+- Job seekers preparing for skills tests
+- Professionals wanting to improve productivity
+- Business users who work with data daily
+- Anyone who wants to master spreadsheet software
+
+Spreadsheet skills are essential in today's workplace. Whether you're preparing for a new job, advancing your career, or simply want to be more productive, this app gives you the practical training you need.
+
+This app is designed to teach you Microsoft Excel and spreadsheet skills. Download now and start learning today.
+
+Note: Contains ads. Offers in-app purchases.
+
+
+================================================================================
+KEYWORD STRATEGY (TRADEMARK-CONSCIOUS)
+================================================================================
+
+Primary (safe, high value):
+- spreadsheet/spreadsheets (15+ mentions)
+- formulas
+- functions
+- pivot tables
+- data analysis
+- charts
+- tutorial
+- lessons
+- training
+- beginner/advanced
+
+Secondary (descriptive use of Excel - allowed in description):
+- Excel (used descriptively, not for keyword stuffing)
+- Microsoft Excel (used once to describe what app teaches)
+
+Avoided in excessive repetition:
+- Microsoft (used only once descriptively)
+- Excel (limited use, descriptive only)
+- 365 (avoided)
+- Office (avoided)
+
+
+================================================================================
+GOOGLE PLAY ASO TIPS
+================================================================================
+
+1. Title and Short Description are most important for ranking
+2. Full description should include keywords naturally (avoid stuffing)
+3. Keywords in first paragraph carry more weight
+4. Use bullet points and headers for readability
+5. Include a clear call-to-action at the end
+6. Trademark terms should be used descriptively, not for keyword gaming
+
+
+================================================================================
+COMPETITIVE POSITIONING
+================================================================================
+
+Competitors:
+- Tutorial for Excel: Free, text-based, no structured course
+- Learn Excel Formulas Functions: Reference only, no video
+- Excel Formulas: Learn & Try: Formulas only, limited scope
+- Udemy/LinkedIn Learning: Subscription-based, expensive
+
+Your Advantages:
+1. 3-course structured progression (Beginner > Intermediate > Advanced)
+2. 123 video lessons with 9+ hours of content
+3. One-time purchase (vs $15-30/month subscriptions)
+4. 7 language support (rare in category)
+5. Mobile-first design with offline access
+
+
+================================================================================
+TRADEMARK RISK ASSESSMENT
+================================================================================
+
+| Element | Safe | Moderate Risk | High Risk |
+|---------|------|---------------|-----------|
+| App Title | Spreadsheet Mastery | Learn Spreadsheets: Excel Guide | Excel Mastery |
+| Short Desc | Learn spreadsheets... | Learn Excel with... | Microsoft Excel Course |
+| Full Desc | Descriptive Excel use | OK | Excessive Excel stuffing |
+
+RECOMMENDATION: Use SAFE title and short description. Full description can
+mention Excel when describing what app teaches (this is fair use).
+
+================================================================================

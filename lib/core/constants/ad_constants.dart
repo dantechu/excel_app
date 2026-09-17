@@ -10,17 +10,17 @@ class AdConstants {
   static const String testAndroidBannerId = 'ca-app-pub-3940256099942544/6300978111';
   static const String testIosBannerId = 'ca-app-pub-3940256099942544/2934735716';
 
-  // Production Interstitial Ads (replace XXXXXXXX with actual IDs when ready)
-  static const String androidInterstitialId = 'ca-app-pub-9740790965972178/XXXXXXXX';
-  static const String iosInterstitialId = 'ca-app-pub-9740790965972178/XXXXXXXX';
+  // Production Interstitial Ads
+  static const String androidInterstitialId = 'ca-app-pub-9740790965972178/1585336471';
+  static const String iosInterstitialId = 'ca-app-pub-9740790965972178/1585336471';
 
   // Test Interstitial Ads (AdMob official test IDs)
   static const String testAndroidInterstitialId = 'ca-app-pub-3940256099942544/1033173712';
   static const String testIosInterstitialId = 'ca-app-pub-3940256099942544/4411468910';
 
-  // Production Rewarded Ads (replace XXXXXXXX with actual IDs when ready)
-  static const String androidRewardedId = 'ca-app-pub-9740790965972178/XXXXXXXX';
-  static const String iosRewardedId = 'ca-app-pub-9740790965972178/XXXXXXXX';
+  // Production Rewarded Ads
+  static const String androidRewardedId = 'ca-app-pub-9740790965972178/9205700852';
+  static const String iosRewardedId = 'ca-app-pub-9740790965972178/9205700852';
 
   // Test Rewarded Ads (AdMob official test IDs)
   static const String testAndroidRewardedId = 'ca-app-pub-3940256099942544/5224354917';

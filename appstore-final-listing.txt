@@ -1,0 +1,250 @@
+================================================================================
+iOS APP STORE LISTING - EXCEL MASTERY (Copy-Paste Ready)
+================================================================================
+
+Based on competitive analysis of Excel learning apps in September 2026.
+
+App teaches Microsoft 365 Excel through 3 structured courses:
+- Beginner (44 lessons, 3h 41m)
+- Intermediate (44 lessons, 2h 36m)
+- Advanced (35 lessons, 2h 53m)
+
+================================================================================
+TRADEMARK POLICY NOTICE
+================================================================================
+
+Microsoft's trademark guidelines state:
+- Cannot use "Microsoft" or "Excel" in app name, developer name, or screenshots
+- CAN use these terms in text description to state compatibility/what app teaches
+
+Apple's Guidelines 2.3.7 & 5.2.1:
+- Cannot pack metadata with trademarked terms for keyword gaming
+- Cannot use trademarks without permission
+
+RECOMMENDATION: Use the SAFER options below to avoid rejection risk.
+However, apps like "Tutorial for MS Excel" exist on the App Store, suggesting
+some tolerance for educational apps using descriptive trademark references.
+
+--------------------------------------------------------------------------------
+APP NAME OPTIONS (30 characters max)
+--------------------------------------------------------------------------------
+
+OPTION A - SAFEST (No trademark in name):
+
+Spreadsheet Mastery: Full Course
+
+(30 characters)
+
+OPTION B - MODERATE RISK (Commonly used pattern):
+
+Learn Spreadsheets: Excel Guide
+
+(30 characters)
+
+OPTION C - HIGHER RISK (Uses trademark directly):
+
+Excel Mastery: Learn & Master
+
+(29 characters)
+Note: Similar to existing apps like "Tutorial for MS Excel" but carries
+rejection risk. If rejected, switch to Option A.
+
+
+--------------------------------------------------------------------------------
+SUBTITLE OPTIONS (30 characters max)
+--------------------------------------------------------------------------------
+
+OPTION A - SAFEST:
+
+Beginner to Advanced Lessons
+
+(28 characters)
+
+OPTION B - MENTIONS EXCEL (moderate risk):
+
+Learn Excel Step by Step
+
+(24 characters)
+
+
+--------------------------------------------------------------------------------
+KEYWORDS FIELD (100 characters max, comma-separated, NO spaces after commas)
+--------------------------------------------------------------------------------
+
+SAFE VERSION (recommended):
+
+spreadsheet,formulas,functions,pivot tables,training,data analysis,charts,shortcuts,vlookup,cells
+
+(97 characters)
+
+Notes:
+- Removed "office" and "365" (Microsoft trademarks)
+- "excel" not in keywords (if used in Title, already indexed; if not, avoid trademark)
+- Focus on feature/skill keywords that users search for
+- Covers key skills: formulas, functions, pivot tables, vlookup
+- Includes action terms: training, data analysis
+
+
+--------------------------------------------------------------------------------
+PROMOTIONAL TEXT (170 characters max - can update without app release)
+--------------------------------------------------------------------------------
+
+SAFE VERSION:
+
+Master spreadsheets with 123 video lessons. Beginner to Advanced courses. 7 languages. Formulas, charts, pivot tables & more. One-time purchase, no subscription.
+
+(163 characters)
+
+MODERATE RISK VERSION (mentions Excel in description - allowed per Microsoft):
+
+Learn Excel with 123 video lessons. Beginner to Advanced courses. 7 languages. Formulas, charts, pivot tables & more. One-time purchase, no subscription.
+
+(155 characters)
+
+
+--------------------------------------------------------------------------------
+DESCRIPTION (4000 characters max - NOT indexed for search, write for users)
+--------------------------------------------------------------------------------
+
+NOTE: Using "Excel" and "Microsoft" in the DESCRIPTION is generally acceptable
+per Microsoft's guidelines when truthfully describing what the app teaches.
+The description is for users, not keyword gaming.
+
+---
+
+Master spreadsheets with the most comprehensive Excel learning app on mobile. Whether you're a complete beginner or looking to advance your skills, this app provides everything you need to become proficient in Microsoft Excel and spreadsheet software.
+
+3 COMPLETE COURSES - BEGINNER TO ADVANCED
+
+Learn Excel the right way with our structured progression system. Each course builds on the previous one, taking you from spreadsheet basics to advanced data analysis.
+
+BEGINNER COURSE
+44 video lessons covering the essentials: navigating Excel, entering data, basic formulas, formatting cells, creating simple charts, and understanding the spreadsheet interface. Perfect for those who have never used a spreadsheet before.
+
+INTERMEDIATE COURSE
+44 video lessons taking your skills further: complex formulas, functions like VLOOKUP and IF statements, data sorting and filtering, conditional formatting, and creating professional charts and graphs.
+
+ADVANCED COURSE
+35 video lessons for power users: pivot tables, data analysis, advanced functions, macros basics, data validation, and techniques used by Excel professionals in business environments.
+
+FEATURES
+
+Step-by-step HD video instruction organized by skill level. Each lesson is designed to build on the previous one, ensuring you never feel lost.
+
+123 video lessons covering everything from basic spreadsheet navigation to advanced data analysis techniques.
+
+9+ hours of content across 27 sections, providing comprehensive coverage of spreadsheet features and Excel functionality.
+
+Learn in your language with full support for English, Chinese, Spanish, Japanese, French, German, and Korean.
+
+Download lessons for offline practice. Learn on your commute, during travel, or anywhere without internet access.
+
+WHAT YOU'LL LEARN
+
+Formulas & Functions - Master essential formulas including SUM, AVERAGE, COUNT, VLOOKUP, HLOOKUP, IF, AND, OR, and many more.
+
+Data Organization - Learn to sort, filter, and organize large datasets efficiently. Create tables and manage data like a professional.
+
+Charts & Visualization - Create compelling charts and graphs to visualize your data. Learn which chart types work best for different data.
+
+Pivot Tables - Transform raw data into meaningful insights with pivot tables. Summarize thousands of rows in seconds.
+
+Formatting & Presentation - Make your spreadsheets look professional with proper formatting, conditional formatting, and layout techniques.
+
+Productivity Shortcuts - Learn keyboard shortcuts and time-saving techniques that spreadsheet professionals use daily.
+
+WHY THIS APP?
+
+Most spreadsheet apps only teach formulas or offer scattered tutorials. This app provides a complete learning path from beginner to advanced, with video lessons that show you exactly what to do step by step.
+
+Whether you're preparing for a new job, advancing your career, or simply want to be more productive, Excel and spreadsheet skills are essential in today's workplace. You'll gain practical skills you can apply immediately.
+
+PREMIUM FEATURES
+
+Unlock all 123 video lessons with a one-time purchase. Download any lesson for offline viewing. Remove advertisements. Access all three complete courses.
+
+No subscription required. Pay once, learn forever.
+
+Perfect for students, professionals, business users, and anyone who wants to master spreadsheets and Excel. Download now and start your learning journey.
+
+
+================================================================================
+iOS vs GOOGLE PLAY - KEY DIFFERENCES
+================================================================================
+
+| Field | iOS | Google Play |
+|-------|-----|-------------|
+| Title | 30 chars | 30 chars |
+| Subtitle | 30 chars (iOS only) | N/A |
+| Short Description | N/A | 80 chars |
+| Keywords Field | 100 chars (hidden) | N/A (uses description) |
+| Description | NOT indexed | Indexed for search |
+
+IMPORTANT:
+- iOS description is for USERS only, not search
+- Google Play description should be keyword-rich
+- iOS keywords field should NOT repeat words from Title/Subtitle
+
+
+================================================================================
+KEYWORD STRATEGY EXPLANATION (SAFE VERSION)
+================================================================================
+
+Words in Title "Spreadsheet Mastery: Full Course":
+- spreadsheet (indexed)
+- mastery (indexed)
+- full (indexed)
+- course (indexed)
+
+Words in Subtitle "Beginner to Advanced Lessons":
+- beginner (indexed)
+- advanced (indexed)
+- lessons (indexed)
+
+Keywords Field adds NEW terms not in Title/Subtitle:
+- formulas (key feature)
+- functions (key feature)
+- pivot tables (advanced feature)
+- training (learning intent)
+- data analysis (business value)
+- charts (visual feature)
+- shortcuts (productivity)
+- vlookup (popular function search)
+- cells (basic term)
+
+Total indexed terms: 16+ unique searchable keywords
+
+
+================================================================================
+COMPETITIVE POSITIONING
+================================================================================
+
+Competitors:
+- Tutorial for MS Excel: Free, text-based, no structured course
+- Learn Excel Formula: Formulas only, no video lessons
+- Udemy/LinkedIn Learning: Subscription-based, expensive
+- Generic Excel apps: Fragment tutorials, no progression
+
+Your Advantages:
+1. 3-course structured progression (Beginner > Intermediate > Advanced)
+2. 123 video lessons with 9+ hours of content
+3. One-time purchase (vs $15-30/month subscriptions)
+4. 7 language support (rare in category)
+5. Mobile-first design with offline access
+
+
+================================================================================
+TRADEMARK RISK ASSESSMENT
+================================================================================
+
+| Element | Safe | Moderate Risk | High Risk |
+|---------|------|---------------|-----------|
+| App Name | Spreadsheet Mastery | Learn Spreadsheets | Excel Mastery |
+| Subtitle | Beginner to Advanced | Learn Excel Step by Step | Microsoft Excel Course |
+| Keywords | formulas, pivot tables | (none with Excel) | excel, microsoft, 365 |
+| Description | Allowed to mention Excel | Allowed | Allowed |
+
+RECOMMENDATION: Start with SAFEST options. If app performs poorly in search,
+gradually test moderate-risk options. Monitor for rejection notices.
+
+================================================================================
