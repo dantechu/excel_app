@@ -64,6 +64,4 @@ flutter {
 dependencies {
     // Core library desugaring (required for flutter_local_notifications)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
-    // Google Play Billing Library 8.0.0+ (required by Google Play from Aug 31, 2026)
-    implementation("com.android.billingclient:billing:8.0.0")
 }
